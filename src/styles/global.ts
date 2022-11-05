@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -24,7 +24,7 @@ export const GlobalStyle = createGlobalStyle`
   input,
   button,
   textarea {
-    font-family: ${props => props.theme.font['sans-serif']};
+    font-family: ${(props) => props.theme.font['sans-serif']};
     font-weight: 400;
     font-size: 1rem;
   }

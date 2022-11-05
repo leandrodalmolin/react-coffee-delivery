@@ -1,5 +1,5 @@
 export const defaultTheme = {
-  'white': '#FFF',
+  white: '#FFF',
 
   'base-100': '#FAFAFA',
   'base-200': '#F3F2F2',
@@ -21,6 +21,6 @@ export const defaultTheme = {
 
   font: {
     'sans-serif': "'Roboto', Arial, Helvetica, sans-serif", // 400, 700
-    'cursive': "'Baloo 2', 'Brush Script MT', cursive", // 700, 800
-  }
+    cursive: "'Baloo 2', 'Brush Script MT', cursive", // 700, 800
+  },
 }
