@@ -1,19 +1,24 @@
 import { ShoppingCartSimple } from 'phosphor-react'
 import { Link } from 'react-router-dom'
 import logo from '../../assets/logo.svg'
+import { Wrapper } from '../../layouts/DefaultLayout/styles'
 import { Location } from '../Location'
 import { HeaderActions, HeaderContainer } from './styles'
 
 export function Header() {
   return (
-    <HeaderContainer>
-      <img src={logo} alt="" />
-      <HeaderActions>
-        <Location />
-        <Link to="/checkout">
-          <ShoppingCartSimple size={22} weight="fill" />
+    <Wrapper>
+      <HeaderContainer>
+        <Link to="/">
+          <img src={logo} alt="" />
         </Link>
-      </HeaderActions>
-    </HeaderContainer>
+        <HeaderActions>
+          <Location />
+          <Link to="/checkout">
+            <ShoppingCartSimple size={22} weight="fill" />
+          </Link>
+        </HeaderActions>
+      </HeaderContainer>
+    </Wrapper>
   )
 }

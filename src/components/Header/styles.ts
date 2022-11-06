@@ -1,10 +1,15 @@
 import styled from 'styled-components'
+import { breakpoint } from '../../styles/breakpoints'
 
 export const HeaderContainer = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2.5rem 0;
+  padding: 2rem 0;
+
+  @media ${breakpoint.md} {
+    padding: 2.5rem 0;
+  }
 `
 export const HeaderActions = styled.div`
   display: flex;

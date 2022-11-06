@@ -1,3 +1,11 @@
+import { Hero } from '../components/Hero'
+import { Wrapper } from '../layouts/DefaultLayout/styles'
+
 export function Home() {
-  return <div>Home</div>
+  return (
+    <>
+      <Hero />
+      <Wrapper>Main</Wrapper>
+    </>
+  )
 }
