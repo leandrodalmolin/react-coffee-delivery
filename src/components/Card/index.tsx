@@ -1,6 +1,8 @@
-import { v4 as uuidv4 } from 'uuid'
 import { HeadingMD } from '../../styles/typography'
-import { CardContainer, CardFooter, TagContainer } from './styles'
+import { CardForm } from './CardForm'
+import { PriceTag } from './PriceTag'
+import { CardContainer, CardFooter } from './styles'
+import { TagsList } from './TagsList'
 
 interface CardProps {
   title: string
@@ -13,26 +15,15 @@ interface CardProps {
 export function Card({ title, description, tags, price, image }: CardProps) {
   return (
     <CardContainer>
-      <img src={image} alt={title} />
-      <TagContainer>
-        {tags.map((tag) => (
-          <li key={uuidv4()}>{tag}</li>
-        ))}
-      </TagContainer>
-      <HeadingMD>{title}</HeadingMD>
-      <p>{description}</p>
+      <div>
+        <img src={image} alt={title} />
+        <TagsList tags={tags} />
+        <HeadingMD>{title}</HeadingMD>
+        <p>{description}</p>
+      </div>
       <CardFooter>
-        <div>
-          <span>£</span>
-          {price}
-        </div>
-        <form>
-          <div>
-            <label htmlFor=""></label>
-            <input type="number" />
-          </div>
-          <button type="submit">Cart</button>
-        </form>
+        <PriceTag price={price} />
+        <CardForm />
       </CardFooter>
     </CardContainer>
   )
