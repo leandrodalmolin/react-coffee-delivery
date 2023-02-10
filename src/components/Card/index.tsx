@@ -1,30 +1,10 @@
-import { HeadingMD } from '../../styles/typography'
-import { CardForm } from './CardForm'
-import { PriceTag } from './PriceTag'
-import { CardContainer, CardFooter } from './styles'
-import { TagsList } from './TagsList'
+import { ReactNode } from 'react'
+import { CardContainer } from './styles'
 
 interface CardProps {
-  title: string
-  description: string
-  tags: string[]
-  price: number
-  image: string
+  children: ReactNode
 }
 
-export function Card({ title, description, tags, price, image }: CardProps) {
-  return (
-    <CardContainer>
-      <div>
-        <img src={image} alt={title} />
-        <TagsList tags={tags} />
-        <HeadingMD>{title}</HeadingMD>
-        <p>{description}</p>
-      </div>
-      <CardFooter>
-        <PriceTag price={price} />
-        <CardForm />
-      </CardFooter>
-    </CardContainer>
-  )
+export function Card({ children }: CardProps) {
+  return <CardContainer>{children}</CardContainer>
 }

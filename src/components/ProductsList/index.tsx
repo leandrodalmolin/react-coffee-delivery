@@ -1,8 +1,13 @@
 import { v4 as uuidv4 } from 'uuid'
-import { HeadingLG } from '../../styles/typography'
+import { HeadingLG, HeadingMD } from '../../styles/typography'
 import { ProductsListContainer } from './styles'
 import TraditionalEspressoImg from '../../assets/products/traditional-espresso.png'
 import { Card } from '../Card'
+import { CardFooter } from '../Card/CardFooter'
+import { PriceTag } from '../PriceTag'
+import { AddToBasketForm } from '../AddToBasketForm'
+import { TagsList } from '../TagsList'
+import { CardBody } from '../Card/CardBody'
 
 type Tag = 'Traditional' | 'Cold' | 'With Milk' | 'Alcoholic' | 'Special'
 
@@ -72,14 +77,18 @@ export function ProductsList() {
       <HeadingLG>Our Coffees</HeadingLG>
       <ProductsListContainer>
         {PRODUCTS.map(({ id, title, description, image, price, tags }) => (
-          <Card
-            key={id}
-            title={title}
-            description={description}
-            image={image}
-            price={price}
-            tags={tags}
-          />
+          <Card key={id}>
+            <CardBody>
+              <img src={image} alt={title} />
+              <TagsList tags={tags} />
+              <HeadingMD>{title}</HeadingMD>
+              <p>{description}</p>
+            </CardBody>
+            <CardFooter>
+              <PriceTag price={price} />
+              <AddToBasketForm />
+            </CardFooter>
+          </Card>
         ))}
       </ProductsListContainer>
     </>
