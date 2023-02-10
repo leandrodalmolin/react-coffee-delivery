@@ -1,10 +1,15 @@
 import { ReactNode } from 'react'
-import { CardContainer } from './styles'
+import { CardContainer, CardVariant } from './styles'
 
 interface CardProps {
-  children: ReactNode
+  variant?: CardVariant
+  children?: ReactNode
 }
 
-export function Card({ children }: CardProps) {
-  return <CardContainer>{children}</CardContainer>
+export function Card({ variant = 'even', children, ...rest }: CardProps) {
+  return (
+    <CardContainer variant={variant} {...rest}>
+      {children}
+    </CardContainer>
+  )
 }

@@ -14,7 +14,7 @@ export function ProductsList() {
       <HeadingLG>Our Coffees</HeadingLG>
       <ProductsListContainer>
         {productsData.map(({ id, title, description, image, price, tags }) => (
-          <Card key={id}>
+          <Card key={id} variant="uneven">
             <CardBody>
               <img src={image} alt={title} />
               <TagsList tags={tags} />
