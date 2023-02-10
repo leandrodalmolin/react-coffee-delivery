@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const ProductsList = styled.div`
+export const ProductsListContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(256px, 1fr));
   gap: 2.5rem 2rem;

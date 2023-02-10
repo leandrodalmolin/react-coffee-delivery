@@ -1,5 +1,5 @@
 import { Hero } from '../components/Hero'
-import { Products } from '../components/Products'
+import { ProductsList } from '../components/ProductsList'
 import { Wrapper } from '../layouts/DefaultLayout/styles'
 
 export function Home() {
@@ -7,7 +7,7 @@ export function Home() {
     <>
       <Hero />
       <Wrapper>
-        <Products />
+        <ProductsList />
       </Wrapper>
     </>
   )

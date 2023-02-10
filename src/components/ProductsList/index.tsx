@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 import { HeadingLG } from '../../styles/typography'
-import { ProductsList } from './styles'
+import { ProductsListContainer } from './styles'
 import TraditionalEspressoImg from '../../assets/products/traditional-espresso.png'
 import { Card } from '../Card'
 
@@ -66,11 +66,11 @@ const PRODUCTS: Product[] = [
   },
 ]
 
-export function Products() {
+export function ProductsList() {
   return (
     <>
       <HeadingLG>Our Coffees</HeadingLG>
-      <ProductsList>
+      <ProductsListContainer>
         {PRODUCTS.map(({ id, title, description, image, price, tags }) => (
           <Card
             key={id}
@@ -81,7 +81,7 @@ export function Products() {
             tags={tags}
           />
         ))}
-      </ProductsList>
+      </ProductsListContainer>
     </>
   )
 }
