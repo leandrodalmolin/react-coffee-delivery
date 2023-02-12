@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { breakpoint } from '../../styles/breakpoints'
 
-export const CheckoutContainer = styled.div`
+export const CheckoutFormContainer = styled.form`
   display: grid;
   gap: 2rem;
 
