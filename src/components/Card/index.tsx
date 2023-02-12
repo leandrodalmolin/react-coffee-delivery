@@ -1,20 +1,27 @@
 import { ReactNode } from 'react'
-import { CardContainer, CardVariant } from './styles'
+import { CardBorderRadius, CardContainer, CardPadding } from './styles'
 
 interface CardProps {
-  variant?: CardVariant
+  borderRadius?: CardBorderRadius
+  padding?: CardPadding
   alignCenter?: Boolean
   children?: ReactNode
 }
 
 export function Card({
-  variant = 'even',
-  children,
+  borderRadius = 'even',
+  padding = 'medium',
   alignCenter = false,
+  children,
   ...rest
 }: CardProps) {
   return (
-    <CardContainer variant={variant} alignCenter={alignCenter} {...rest}>
+    <CardContainer
+      borderRadius={borderRadius}
+      padding={padding}
+      alignCenter={alignCenter}
+      {...rest}
+    >
       {children}
     </CardContainer>
   )
