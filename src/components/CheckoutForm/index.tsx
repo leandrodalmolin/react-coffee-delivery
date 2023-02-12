@@ -4,6 +4,7 @@ import { HeadingMD } from '../../styles/typography'
 import { Card } from '../Card'
 import { CardHeading } from '../Card/CardHeading'
 import { DeliveryAddress } from './DeliveryAddress'
+import { PaymentOptions } from './PaymentOptions'
 import { CheckoutFormContainer } from './styles'
 
 export function CheckoutForm() {
@@ -29,6 +30,7 @@ export function CheckoutForm() {
           >
             <CurrencyDollar size={22} color={theme['purple-700']} />
           </CardHeading>
+          <PaymentOptions />
         </Card>
       </section>
       <section>
