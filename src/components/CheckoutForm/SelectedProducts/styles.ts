@@ -68,6 +68,7 @@ export const ItemRightContainer = styled.div`
 `
 
 export const Divider = styled.hr`
+  border: 0;
   border-top: 1px solid ${({ theme }) => theme['base-400']};
   margin: 1.5rem 0;
 `
