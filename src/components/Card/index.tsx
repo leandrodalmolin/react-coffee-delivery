@@ -1,7 +1,13 @@
 import { ReactNode } from 'react'
-import { CardBorderRadius, CardContainer, CardPadding } from './styles'
+import {
+  CardBorderRadius,
+  CardContainer,
+  CardPadding,
+  CardVariant,
+} from './styles'
 
 interface CardProps {
+  variant?: CardVariant
   borderRadius?: CardBorderRadius
   padding?: CardPadding
   alignCenter?: Boolean
@@ -9,6 +15,7 @@ interface CardProps {
 }
 
 export function Card({
+  variant = 'flat',
   borderRadius = 'even',
   padding = 'medium',
   alignCenter = false,
@@ -17,6 +24,7 @@ export function Card({
 }: CardProps) {
   return (
     <CardContainer
+      variant={variant}
       borderRadius={borderRadius}
       padding={padding}
       alignCenter={alignCenter}
