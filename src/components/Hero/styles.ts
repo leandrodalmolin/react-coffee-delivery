@@ -99,21 +99,3 @@ export const HeroList = styled.ul`
     grid-template-columns: repeat(2, 1fr);
   }
 `
-
-interface RoundedIconProps {
-  background?: string
-}
-
-export const RoundedIcon = styled.div<RoundedIconProps>`
-  border-radius: 50%;
-  padding: 0.5rem;
-  color: ${({ theme }) => theme.white};
-  background-color: ${({ background, theme }) =>
-    background || theme['base-700']};
-
-  svg {
-    display: block;
-    width: 1rem;
-    height: 1rem;
-  }
-`
