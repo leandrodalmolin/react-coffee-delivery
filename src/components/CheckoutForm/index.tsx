@@ -1,4 +1,6 @@
 import { CurrencyDollar, MapPinLine } from 'phosphor-react'
+import { FormEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useTheme } from 'styled-components'
 import { HeadingMD } from '../../styles/typography'
 import { Card } from '../Card'
@@ -11,9 +13,15 @@ import { CheckoutFormContainer, SubmitButton } from './styles'
 
 export function CheckoutForm() {
   const theme = useTheme()
+  const navigate = useNavigate()
+
+  function handleFormSubmit(e: FormEvent) {
+    e.preventDefault()
+    navigate('/success')
+  }
 
   return (
-    <CheckoutFormContainer>
+    <CheckoutFormContainer onSubmit={handleFormSubmit}>
       <section>
         <HeadingMD>Complete your order</HeadingMD>
         <Card>
@@ -40,7 +48,7 @@ export function CheckoutForm() {
         <Card borderRadius="uneven">
           <SelectedProducts />
           <OrderTotals />
-          <SubmitButton type="button">Confirm order</SubmitButton>
+          <SubmitButton type="submit">Confirm order</SubmitButton>
         </Card>
       </section>
     </CheckoutFormContainer>
