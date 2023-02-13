@@ -4,8 +4,10 @@ import { HeadingMD } from '../../styles/typography'
 import { Card } from '../Card'
 import { CardHeading } from '../Card/CardHeading'
 import { DeliveryAddress } from './DeliveryAddress'
+import { OrderTotals } from './OrderTotals'
 import { PaymentOptions } from './PaymentOptions'
-import { CheckoutFormContainer } from './styles'
+import { SelectedProducts } from './SelectedProducts'
+import { CheckoutFormContainer, SubmitButton } from './styles'
 
 export function CheckoutForm() {
   const theme = useTheme()
@@ -36,7 +38,9 @@ export function CheckoutForm() {
       <section>
         <HeadingMD>Selected coffees</HeadingMD>
         <Card borderRadius="uneven">
-          <p>List of products</p>
+          <SelectedProducts />
+          <OrderTotals />
+          <SubmitButton type="button">Confirm order</SubmitButton>
         </Card>
       </section>
     </CheckoutFormContainer>

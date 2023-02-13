@@ -11,8 +11,24 @@ export const DeliveryAddressContainer = styled.div`
     width: 100%;
     padding: 0.75rem;
     font-size: 0.875rem;
-    color: ${({ theme }) => theme['base-600']};
+    color: ${({ theme }) => theme['base-700']};
     background-color: ${({ theme }) => theme['base-300']};
+
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    ::placeholder {
+      color: ${({ theme }) => theme['base-600']};
+      opacity: 1; /* Firefox */
+    }
+
+    /* Internet Explorer 10-11 */
+    :-ms-input-placeholder {
+      color: ${({ theme }) => theme['base-600']};
+    }
+
+    /* Microsoft Edge */
+    ::-ms-input-placeholder {
+      color: ${({ theme }) => theme['base-600']};
+    }
   }
 
   @media ${breakpoint.sm} {
