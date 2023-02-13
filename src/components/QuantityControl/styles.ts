@@ -19,6 +19,13 @@ export const QuantityControlContainer = styled.div`
 
     svg {
       color: ${({ theme }) => theme['purple-500']};
+      transition: color 150ms;
+    }
+
+    &:hover {
+      svg {
+        color: ${({ theme }) => theme['purple-700']};
+      }
     }
   }
 `
