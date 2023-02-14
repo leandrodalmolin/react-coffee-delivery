@@ -1,6 +1,11 @@
 import styled from 'styled-components'
 
 export const ProductContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+
   img {
     margin-top: -2.5rem;
     margin-bottom: 0.75rem;
