@@ -1,3 +1,5 @@
+import { Product } from './contexts/BasketContext'
+
 import TraditionalEspressoImg from './assets/products/traditional-espresso.png'
 import AmericanoEspressoImg from './assets/products/americano-espresso.png'
 import CreamyEspressoImg from './assets/products/creamy-espresso.png'
@@ -12,22 +14,6 @@ import CubanImg from './assets/products/cuban.png'
 import HawaiianImg from './assets/products/hawaiian.png'
 import ArabicImg from './assets/products/arabic.png'
 import IrishImg from './assets/products/irish.png'
-
-export type TagType =
-  | 'Traditional'
-  | 'Cold'
-  | 'With Milk'
-  | 'Alcoholic'
-  | 'Special'
-
-export interface Product {
-  id: string
-  title: string
-  description: string
-  tags: TagType[]
-  price: number
-  image: string
-}
 
 export const productsData: Product[] = [
   {
