@@ -6,7 +6,7 @@ export const PriceTagContainer = styled.div`
     font-family: ${({ theme }) => theme.font['sans-serif']};
     font-size: 0.875rem;
     font-weight: 400;
-    padding-right: 0.25rem;
+    padding-right: 0.2rem;
   }
 
   // Price

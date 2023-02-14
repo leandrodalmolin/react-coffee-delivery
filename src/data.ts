@@ -1,12 +1,17 @@
 import TraditionalEspressoImg from './assets/products/traditional-espresso.png'
 
-type Tag = 'Traditional' | 'Cold' | 'With Milk' | 'Alcoholic' | 'Special'
+export type TagType =
+  | 'Traditional'
+  | 'Cold'
+  | 'With Milk'
+  | 'Alcoholic'
+  | 'Special'
 
 export interface Product {
   id: string
   title: string
   description: string
-  tags: Tag[]
+  tags: TagType[]
   price: number
   image: string
 }
