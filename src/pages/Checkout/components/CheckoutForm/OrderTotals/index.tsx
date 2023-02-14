@@ -1,4 +1,4 @@
-import { priceFormatter } from '../../../utils/formatter'
+import { priceFormatter } from '../../../../../utils/formatter'
 import { OrderTotalsTable } from './styles'
 
 export function OrderTotals() {

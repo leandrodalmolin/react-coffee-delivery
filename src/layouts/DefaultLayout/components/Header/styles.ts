@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { breakpoint } from '../../styles/breakpoints'
+import { breakpoint } from '../../../../styles/breakpoints'
 
 export const HeaderContainer = styled.header`
   display: flex;

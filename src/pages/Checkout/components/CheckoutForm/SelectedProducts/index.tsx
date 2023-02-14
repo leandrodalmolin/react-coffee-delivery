@@ -1,8 +1,8 @@
 import { Trash } from 'phosphor-react'
 import { useTheme } from 'styled-components'
-import { productsData } from '../../../data'
-import { priceFormatter } from '../../../utils/formatter'
-import { QuantityControl } from '../../QuantityControl'
+import { productsData } from '../../../../../data'
+import { priceFormatter } from '../../../../../utils/formatter'
+import { QuantityControl } from '../../../../../components/QuantityControl'
 import {
   Divider,
   ItemCentralContainer,

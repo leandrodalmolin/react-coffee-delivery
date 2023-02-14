@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import heroBg from '../../assets/hero-bg.svg'
-import { breakpoint } from '../../styles/breakpoints'
+import heroBg from '../../../../assets/hero-bg.svg'
+import { breakpoint } from '../../../../styles/breakpoints'
 
 export const HeroContainer = styled.div`
   display: flex;

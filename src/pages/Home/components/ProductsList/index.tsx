@@ -1,12 +1,13 @@
-import { HeadingLG, HeadingMD } from '../../styles/typography'
-import { ProductsListContainer } from './styles'
-import { Card } from '../Card'
-import { CardFooter } from '../Card/CardFooter'
+import { HeadingLG, HeadingMD } from '../../../../styles/typography'
+import { AddToBasketForm, ProductsListContainer } from './styles'
+import { Card } from '../../../../components/Card'
+import { CardFooter } from '../../../../components/Card/CardFooter'
 import { PriceTag } from '../PriceTag'
-import { AddToBasketForm } from '../AddToBasketForm'
 import { TagsList } from '../TagsList'
-import { CardBody } from '../Card/CardBody'
-import { productsData } from '../../data'
+import { CardBody } from '../../../../components/Card/CardBody'
+import { productsData } from '../../../../data'
+import { QuantityControl } from '../../../../components/QuantityControl'
+import { ShoppingCartSimple } from 'phosphor-react'
 
 export function ProductsList() {
   return (
@@ -23,7 +24,12 @@ export function ProductsList() {
             </CardBody>
             <CardFooter>
               <PriceTag price={price} />
-              <AddToBasketForm />
+              <AddToBasketForm>
+                <QuantityControl />
+                <button type="button">
+                  <ShoppingCartSimple size={22} weight="fill" />
+                </button>
+              </AddToBasketForm>
             </CardFooter>
           </Card>
         ))}

@@ -1,4 +1,4 @@
-import { priceFormatter } from '../../utils/formatter'
+import { priceFormatter } from '../../../../utils/formatter'
 import { PriceTagContainer } from './styles'
 
 interface PriceTagProps {

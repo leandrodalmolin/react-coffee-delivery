@@ -1,6 +1,13 @@
 import styled from 'styled-components'
 
-export const AddToBasketFormContainer = styled.form`
+export const ProductsListContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(256px, 1fr));
+  gap: 2.5rem 2rem;
+  margin-top: 3.4rem;
+`
+
+export const AddToBasketForm = styled.form`
   display: flex;
   align-items: center;
   gap: 0.5rem;

@@ -1,7 +1,7 @@
 import { ShoppingCartSimple } from 'phosphor-react'
 import { Link } from 'react-router-dom'
-import logo from '../../assets/logo.svg'
-import { Wrapper } from '../../layouts/DefaultLayout/styles'
+import logo from '../../../../assets/logo.svg'
+import { Wrapper } from '../../styles'
 import { Location } from '../Location'
 import { HeaderActions, HeaderContainer } from './styles'
 
