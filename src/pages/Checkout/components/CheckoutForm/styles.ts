@@ -4,6 +4,7 @@ import { breakpoint } from '../../../../styles/breakpoints'
 export const CheckoutFormContainer = styled.form`
   display: grid;
   gap: 2rem;
+  margin-top: 1.75rem;
 
   section {
     display: flex;
