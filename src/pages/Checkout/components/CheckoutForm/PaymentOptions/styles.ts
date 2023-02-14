@@ -21,7 +21,7 @@ export const ToggleItem = styled(ToggleGroup.Item)`
   color: ${({ theme }) => theme['base-700']};
   background-color: ${({ theme }) => theme['base-400']};
   cursor: pointer;
-  transition: background-color 150ms;
+  transition: background-color ${({ theme }) => theme['transition-duration']};
 
   svg {
     color: ${({ theme }) => theme['purple-700']};

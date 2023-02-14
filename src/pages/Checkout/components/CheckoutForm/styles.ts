@@ -29,7 +29,7 @@ export const SubmitButton = styled.button`
   color: ${({ theme }) => theme.white};
   background-color: ${({ theme }) => theme['yellow-500']};
   cursor: pointer;
-  transition: background-color 150ms;
+  transition: background-color ${({ theme }) => theme['transition-duration']};
 
   &:hover {
     background-color: ${({ theme }) => theme['yellow-700']};

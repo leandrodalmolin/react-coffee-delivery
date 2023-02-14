@@ -33,9 +33,14 @@ export const AddToBasketForm = styled.form`
     color: ${({ theme }) => theme.white};
     background-color: ${({ theme }) => theme['purple-700']};
     cursor: pointer;
+    transition: background-color ${({ theme }) => theme['transition-duration']};
 
     svg {
       display: block;
+    }
+
+    &:hover {
+      background-color: ${({ theme }) => theme['purple-500']};
     }
   }
 `

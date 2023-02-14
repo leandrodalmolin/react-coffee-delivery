@@ -23,4 +23,6 @@ export const defaultTheme = {
     'sans-serif': "'Roboto', Arial, Helvetica, sans-serif", // 400, 700
     cursive: "'Baloo 2', 'Brush Script MT', cursive", // 700, 800
   },
+
+  'transition-duration': '200ms',
 }
