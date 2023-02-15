@@ -1,26 +1,57 @@
-import { ProductContainer, AddToBasketForm } from './styles'
-import { TagType } from '../../../../../data'
+import { useContext } from 'react'
+import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
+import {
+  BasketContext,
+  Product as ProductType,
+} from '../../../../../contexts/BasketContext'
 import { TagsList } from './TagsList'
 import { HeadingMD } from '../../../../../styles/typography'
 import { PriceTag } from './PriceTag'
 import { QuantityControl } from '../../../../../components/QuantityControl'
 import { ShoppingCartSimple } from 'phosphor-react'
 
-interface ProductProps {
+import { ProductContainer, AddToBasketForm } from './styles'
+
+// eslint-disable-next-line prettier/prettier
+interface ProductProps extends ProductType { }
+
+export type FormInputs = {
+  id: string
   title: string
-  description: string
-  tags: TagType[]
   price: number
-  image: string
+  quantity: number
 }
 
 export function Product({
+  id,
   title,
   description,
   image,
   tags,
   price,
 }: ProductProps) {
+  const { addItemToBasket } = useContext(BasketContext)
+  const formMethods = useForm<FormInputs>({
+    defaultValues: {
+      id,
+      title,
+      price,
+      quantity: 0,
+    },
+  })
+  const { register, handleSubmit } = formMethods
+
+  const onSubmit: SubmitHandler<FormInputs> = (data) => {
+    const { id, title, price, quantity } = data
+
+    addItemToBasket({
+      id,
+      title,
+      price,
+      quantity,
+    })
+  }
+
   return (
     <ProductContainer>
       <div>
@@ -31,12 +62,17 @@ export function Product({
       </div>
       <footer>
         <PriceTag price={price} />
-        <AddToBasketForm>
-          <QuantityControl />
-          <button type="button">
-            <ShoppingCartSimple size={22} weight="fill" />
-          </button>
-        </AddToBasketForm>
+        <FormProvider {...formMethods}>
+          <AddToBasketForm onSubmit={handleSubmit(onSubmit)}>
+            <input type="hidden" {...register('id')} />
+            <input type="hidden" {...register('title')} />
+            <input type="hidden" {...register('price')} />
+            <QuantityControl />
+            <button type="submit">
+              <ShoppingCartSimple size={22} weight="fill" />
+            </button>
+          </AddToBasketForm>
+        </FormProvider>
       </footer>
     </ProductContainer>
   )

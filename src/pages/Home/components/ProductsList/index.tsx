@@ -12,6 +12,7 @@ export function ProductsList() {
         {productsData.map(({ id, title, description, image, price, tags }) => (
           <Card key={id} borderRadius="uneven" padding="narrow" alignCenter>
             <Product
+              id={id}
               title={title}
               description={description}
               image={image}

@@ -20,6 +20,7 @@ export const ProductContainer = styled.div`
 
   footer {
     display: flex;
+    justify-content: center;
     gap: 1.4rem;
     margin-top: 2rem;
   }
