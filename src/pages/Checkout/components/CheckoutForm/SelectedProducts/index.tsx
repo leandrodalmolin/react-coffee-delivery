@@ -2,7 +2,7 @@ import { Trash } from 'phosphor-react'
 import { useTheme } from 'styled-components'
 import { productsData } from '../../../../../data'
 import { priceFormatter } from '../../../../../utils/formatter'
-import { QuantityControl } from '../../../../../components/QuantityControl'
+import { QuantityInput } from '../../../../../components/QuantityInput'
 import {
   Divider,
   ItemCentralContainer,
@@ -29,7 +29,7 @@ export function SelectedProducts() {
               </ItemLeftContainer>
               <ItemCentralContainer>
                 <p>{product.title}</p>
-                <QuantityControl />
+                <QuantityInput />
                 <button type="button">
                   <Trash size={16} color={theme['purple-500']} />
                   Remove

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const QuantityControlContainer = styled.div`
+export const QuantityInputContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 0.25rem;

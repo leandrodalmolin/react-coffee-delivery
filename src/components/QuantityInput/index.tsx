@@ -1,9 +1,9 @@
 import { useFormContext } from 'react-hook-form'
 import { Minus, Plus } from 'phosphor-react'
-import { InputNumber, QuantityControlContainer } from './styles'
+import { InputNumber, QuantityInputContainer } from './styles'
 import { FormInputs } from '../../pages/Home/components/ProductsList/Product'
 
-export function QuantityControl() {
+export function QuantityInput() {
   const { register, getValues, setValue } = useFormContext<FormInputs>()
 
   function onIncrementQuantity() {
@@ -19,7 +19,7 @@ export function QuantityControl() {
   }
 
   return (
-    <QuantityControlContainer>
+    <QuantityInputContainer>
       <button type="button" onClick={onDecrementQuantity}>
         <Minus weight="bold" />
         <span className="visually-hidden">Decrement floor</span>
@@ -31,6 +31,6 @@ export function QuantityControl() {
         <Plus weight="bold" />
         <span className="visually-hidden">Increment floor</span>
       </button>
-    </QuantityControlContainer>
+    </QuantityInputContainer>
   )
 }

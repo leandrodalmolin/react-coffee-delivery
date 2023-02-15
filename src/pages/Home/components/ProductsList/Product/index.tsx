@@ -7,7 +7,7 @@ import {
 import { TagsList } from './TagsList'
 import { HeadingMD } from '../../../../../styles/typography'
 import { PriceTag } from './PriceTag'
-import { QuantityControl } from '../../../../../components/QuantityControl'
+import { QuantityInput } from '../../../../../components/QuantityInput'
 import { ShoppingCartSimple } from 'phosphor-react'
 
 import { ProductContainer, AddToBasketForm } from './styles'
@@ -67,7 +67,7 @@ export function Product({
             <input type="hidden" {...register('id')} />
             <input type="hidden" {...register('title')} />
             <input type="hidden" {...register('price')} />
-            <QuantityControl />
+            <QuantityInput />
             <button type="submit">
               <ShoppingCartSimple size={22} weight="fill" />
             </button>
