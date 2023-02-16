@@ -35,9 +35,11 @@ export function basketReducer(state: BasketState, action: any) {
     }
     // Update item
     else if (item && action.item.quantity > 0) {
-      const updatedItems = state.items.filter((product) => product !== item)
+      const itemIndex = state.items.findIndex((product) => product === item)
+      const updatedItems = [...state.items]
+      updatedItems[itemIndex] = action.item
       return {
-        items: [...updatedItems, action.item],
+        items: updatedItems,
       }
     }
     // New item
