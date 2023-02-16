@@ -50,7 +50,8 @@ export function SelectedProducts() {
   return (
     <SelectedProductsList>
       {basketItems.map((product) => {
-        const price = priceFormatter.format(product.price)
+        const totalPrice = product.price * product.quantity
+        const formattedTotalPrice = priceFormatter.format(totalPrice)
 
         return (
           <div key={product.id}>
@@ -75,7 +76,7 @@ export function SelectedProducts() {
                   Remove
                 </button>
               </ItemCentralContainer>
-              <ItemRightContainer>{price}</ItemRightContainer>
+              <ItemRightContainer>{formattedTotalPrice}</ItemRightContainer>
             </SelectedProductsItem>
             <Divider />
           </div>

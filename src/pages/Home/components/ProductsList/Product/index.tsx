@@ -1,9 +1,6 @@
 import { useContext } from 'react'
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'
-import {
-  BasketContext,
-  Product as ProductType,
-} from '../../../../../contexts/BasketContext'
+import { BasketContext } from '../../../../../contexts/BasketContext'
 import { TagsList } from './TagsList'
 import { HeadingMD } from '../../../../../styles/typography'
 import { PriceTag } from './PriceTag'
@@ -11,12 +8,11 @@ import { ShoppingCartSimple } from 'phosphor-react'
 import { ProductContainer, AddToBasketForm } from './styles'
 import { QuantityInput } from '../../../../../components/QuantityInput'
 import { BasketItem } from '../../../../../reducers/basket'
+import { ProductType } from '../../../../../data'
 
-// eslint-disable-next-line prettier/prettier
-interface ProductProps extends ProductType { }
 type FormInputs = BasketItem
 
-export function Product(product: ProductProps) {
+export function Product(product: ProductType) {
   const { id, title, description, image, tags, price } = product
   const { addItemToBasket } = useContext(BasketContext)
 

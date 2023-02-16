@@ -17,7 +17,7 @@ export interface BasketState {
 }
 
 export const defaultBasketState = {
-  items: [],
+  items: <BasketItem[]>[],
 }
 
 export function basketReducer(state: BasketState, action: any) {

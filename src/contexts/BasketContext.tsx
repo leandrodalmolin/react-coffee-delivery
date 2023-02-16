@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useReducer } from 'react'
+import { createContext, ReactNode, useMemo, useReducer } from 'react'
 import {
   ActionTypes,
   BasketItem,
@@ -6,24 +6,10 @@ import {
   defaultBasketState,
 } from '../reducers/basket'
 
-export type TagType =
-  | 'Traditional'
-  | 'Cold'
-  | 'With Milk'
-  | 'Alcoholic'
-  | 'Special'
-
-export interface Product {
-  id: string
-  title: string
-  description: string
-  tags: TagType[]
-  price: number
-  image: string
-}
-
 interface BasketContextType {
   items: BasketItem[]
+  deliveryCost: number
+  totalAmount: number
   addItemToBasket: (item: BasketItem) => void
   removeItemFromBasket: (item: BasketItem) => void
 }
@@ -42,6 +28,9 @@ export function BasketContextProvider({
     defaultBasketState,
   )
 
+  // Hardcoded delivery for now
+  const deliveryCost = 3.5
+
   function addItemToBasket(item: BasketItem) {
     dispatchBasketAction({ type: ActionTypes.ADD_ITEM, item })
   }
@@ -50,10 +39,21 @@ export function BasketContextProvider({
     dispatchBasketAction({ type: ActionTypes.REMOVE_ITEM, item })
   }
 
+  // Watch for changes and it doesn't recalculate
+  // the total amount in case screen get rerendered
+  const totalAmount = useMemo(() => {
+    return basketState.items.reduce(
+      (acc, item) => item.price * item.quantity + acc,
+      0,
+    )
+  }, [basketState.items])
+
   return (
     <BasketContext.Provider
       value={{
         items: basketState.items,
+        deliveryCost,
+        totalAmount,
         addItemToBasket,
         removeItemFromBasket,
       }}
