@@ -1,33 +1,39 @@
-import { useFormContext } from 'react-hook-form'
 import { Minus, Plus } from 'phosphor-react'
+import { ChangeEvent } from 'react'
 import { InputNumber, QuantityInputContainer } from './styles'
-import { FormInputs } from '../../pages/Home/components/ProductsList/Product'
 
-export function QuantityInput() {
-  const { register, getValues, setValue } = useFormContext<FormInputs>()
+interface QuantityInputProps {
+  itemId?: string
+  quantity: number
+  onIncrement: () => void
+  onDecrement: () => void
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void
+}
 
-  function onIncrementQuantity() {
-    if (getValues('quantity') < 99) {
-      setValue('quantity', getValues('quantity') + 1)
-    }
-  }
-
-  function onDecrementQuantity() {
-    if (getValues('quantity') > 0) {
-      setValue('quantity', getValues('quantity') - 1)
-    }
-  }
-
+export function QuantityInput({
+  itemId = '',
+  quantity,
+  onDecrement,
+  onIncrement,
+  onChange,
+}: QuantityInputProps) {
   return (
     <QuantityInputContainer>
-      <button type="button" onClick={onDecrementQuantity}>
+      <button type="button" onClick={onDecrement}>
         <Minus weight="bold" />
         <span className="visually-hidden">Decrement floor</span>
       </button>
 
-      <InputNumber type="number" min={0} max={99} {...register('quantity')} />
+      <InputNumber
+        data-item-id={itemId}
+        type="number"
+        min={0}
+        max={99}
+        value={quantity}
+        onChange={onChange}
+      />
 
-      <button type="button" onClick={onIncrementQuantity}>
+      <button type="button" onClick={onIncrement}>
         <Plus weight="bold" />
         <span className="visually-hidden">Increment floor</span>
       </button>
