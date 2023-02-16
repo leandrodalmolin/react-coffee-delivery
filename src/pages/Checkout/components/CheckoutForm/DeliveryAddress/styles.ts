@@ -14,6 +14,11 @@ export const DeliveryAddressContainer = styled.div`
     color: ${({ theme }) => theme['base-700']};
     background-color: ${({ theme }) => theme['base-300']};
 
+    &[aria-invalid='true'] {
+      border-color: ${({ theme }) => theme['error-300']};
+      background-color: ${({ theme }) => theme['error-100']};
+    }
+
     /* Chrome, Firefox, Opera, Safari 10.1+ */
     ::placeholder {
       color: ${({ theme }) => theme['base-600']};

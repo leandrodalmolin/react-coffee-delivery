@@ -31,7 +31,19 @@ export const SubmitButton = styled.button`
   cursor: pointer;
   transition: background-color ${({ theme }) => theme['transition-duration']};
 
-  &:hover {
+  &:disabled {
+    cursor: not-allowed;
+    color: ${({ theme }) => theme['base-300']};
+    background-color: ${({ theme }) => theme['base-600']};
+  }
+
+  &:not(:disabled):hover {
     background-color: ${({ theme }) => theme['yellow-700']};
   }
+`
+
+export const ErrorMessage = styled.p`
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  color: ${({ theme }) => theme['error-500']};
 `

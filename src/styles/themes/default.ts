@@ -1,6 +1,10 @@
 export const defaultTheme = {
   white: '#FFF',
 
+  'error-100': '#f3eeee',
+  'error-300': '#e9868f',
+  'error-500': '#c7515c',
+
   'base-100': '#FAFAFA',
   'base-200': '#F3F2F2',
   'base-300': '#EDEDED',

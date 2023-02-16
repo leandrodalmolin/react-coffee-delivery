@@ -32,7 +32,12 @@ export const ToggleItem = styled(ToggleGroup.Item)`
     background-color: ${({ theme }) => theme['purple-300']};
   }
 
-  &:hover:not([data-state='on']) {
+  &:hover:not([data-state='on']):not([aria-invalid='true']) {
     background-color: ${({ theme }) => theme['base-500']};
+  }
+
+  &[aria-invalid='true'] {
+    border-color: ${({ theme }) => theme['error-500']};
+    background-color: ${({ theme }) => theme['error-100']};
   }
 `
