@@ -2,6 +2,7 @@
 export enum ActionTypes {
   ADD_ITEM = 'ADD_ITEM',
   REMOVE_ITEM = 'REMOVE_ITEM',
+  CLEAR_BASKET = 'CLEAR_BASKET',
 }
 
 export interface BasketItem {
@@ -68,6 +69,13 @@ export function basketReducer(state: BasketState, action: any) {
     return {
       items: state.items,
     }
+  }
+
+  /**
+   * Clear basket
+   */
+  if (action.type === ActionTypes.CLEAR_BASKET) {
+    return defaultBasketState
   }
 
   return defaultBasketState

@@ -12,6 +12,7 @@ interface BasketContextType {
   totalAmount: number
   addItemToBasket: (item: BasketItem) => void
   removeItemFromBasket: (item: BasketItem) => void
+  clearBasket: () => void
 }
 
 export const BasketContext = createContext({} as BasketContextType)
@@ -39,6 +40,10 @@ export function BasketContextProvider({
     dispatchBasketAction({ type: ActionTypes.REMOVE_ITEM, item })
   }
 
+  function clearBasket() {
+    dispatchBasketAction({ type: ActionTypes.CLEAR_BASKET })
+  }
+
   // Watch for changes and it doesn't recalculate
   // the total amount in case screen get rerendered
   const totalAmount = useMemo(() => {
@@ -56,6 +61,7 @@ export function BasketContextProvider({
         totalAmount,
         addItemToBasket,
         removeItemFromBasket,
+        clearBasket,
       }}
     >
       {children}
