@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useState } from 'react'
+import { createContext, ReactNode, useReducer } from 'react'
+import {
+  ActionTypes,
+  BasketItem,
+  basketReducer,
+  defaultBasketState,
+} from '../reducers/basket'
 
 export type TagType =
   | 'Traditional'
@@ -16,17 +22,10 @@ export interface Product {
   image: string
 }
 
-interface BasketItem {
-  id: string
-  title: string
-  price: number
-  quantity: number
-}
-
 interface BasketContextType {
   items: BasketItem[]
-  addItemToBasket: ({ id, title, price, quantity }: BasketItem) => void
-  getNumberOfItems: () => number
+  addItemToBasket: (item: BasketItem) => void
+  removeItemFromBasket: (item: BasketItem) => void
 }
 
 export const BasketContext = createContext({} as BasketContextType)
@@ -35,52 +34,29 @@ interface BasketContextProviderProps {
   children: ReactNode
 }
 
-// eslint-disable-next-line prettier/prettier
-interface addItemToBasketProps extends BasketItem { }
-
 export function BasketContextProvider({
   children,
 }: BasketContextProviderProps) {
-  const [items, setItems] = useState<BasketItem[]>([])
+  const [basketState, dispatchBasketAction] = useReducer(
+    basketReducer,
+    defaultBasketState,
+  )
 
-  function addItemToBasket({
-    id,
-    title,
-    price,
-    quantity,
-  }: addItemToBasketProps) {
-    const item = items.find((item) => item.id === id)
-    if (item) {
-      // Remove item
-      if (quantity === 0) {
-        setItems((oldItems) => {
-          const newItems = oldItems.filter((product) => product !== item)
-          return [...newItems]
-        })
-      }
-
-      // Update item
-      else {
-        setItems((oldItems) => {
-          const newItems = oldItems.filter((product) => product !== item)
-          return [...newItems, { id, title, price, quantity }]
-        })
-      }
-
-      return
-    }
-
-    // Add item
-    setItems((oldItems) => [...oldItems, { id, title, price, quantity }])
+  function addItemToBasket(item: BasketItem) {
+    dispatchBasketAction({ type: ActionTypes.ADD_ITEM, item })
   }
 
-  function getNumberOfItems() {
-    return items.length
+  function removeItemFromBasket(item: BasketItem) {
+    dispatchBasketAction({ type: ActionTypes.REMOVE_ITEM, item })
   }
 
   return (
     <BasketContext.Provider
-      value={{ items, addItemToBasket, getNumberOfItems }}
+      value={{
+        items: basketState.items,
+        addItemToBasket,
+        removeItemFromBasket,
+      }}
     >
       {children}
     </BasketContext.Provider>

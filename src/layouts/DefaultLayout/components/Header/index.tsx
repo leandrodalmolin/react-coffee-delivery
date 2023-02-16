@@ -8,8 +8,8 @@ import { Location } from './Location'
 import { HeaderActions, HeaderContainer } from './styles'
 
 export function Header() {
-  const { getNumberOfItems } = useContext(BasketContext)
-  const numberOfBasketItems = getNumberOfItems()
+  const { items: basketItems } = useContext(BasketContext)
+  const numberOfBasketItems = basketItems.length
 
   return (
     <Wrapper>
