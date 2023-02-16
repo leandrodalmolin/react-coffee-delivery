@@ -1,8 +1,6 @@
 import { Trash } from 'phosphor-react'
 import { useTheme } from 'styled-components'
-import { productsData } from '../../../../../data'
 import { priceFormatter } from '../../../../../utils/formatter'
-import { QuantityInput } from '../../../../../components/QuantityInput'
 import {
   Divider,
   ItemCentralContainer,
@@ -11,14 +9,47 @@ import {
   SelectedProductsItem,
   SelectedProductsList,
 } from './styles'
+import { ChangeEvent, useContext } from 'react'
+import { BasketContext } from '../../../../../contexts/BasketContext'
+import { QuantityInput } from '../../../../../components/QuantityInput'
+import { BasketItem } from '../../../../../reducers/basket'
 
 export function SelectedProducts() {
   const theme = useTheme()
-  const selectedProducts = [productsData[0], productsData[1]]
+  const {
+    items: basketItems,
+    addItemToBasket,
+    removeItemFromBasket,
+  } = useContext(BasketContext)
+
+  function handleQuantityIncrement(item: BasketItem) {
+    if (item.quantity < 99) {
+      addItemToBasket({ ...item, quantity: item.quantity + 1 })
+    }
+  }
+
+  function handleQuantityDecrement(item: BasketItem) {
+    if (item.quantity > 0) {
+      addItemToBasket({ ...item, quantity: item.quantity - 1 })
+    }
+  }
+
+  function handleQuantityChange(event: ChangeEvent<HTMLInputElement>) {
+    const itemId = event.target.dataset.itemId
+    const item = basketItems.find((product) => product.id === itemId)
+    if (!item) return
+
+    const newQuantity = Number(event.target.value)
+    addItemToBasket({ ...item, quantity: newQuantity })
+  }
+
+  function handleRemoveButtonClick(item: BasketItem) {
+    removeItemFromBasket(item)
+  }
 
   return (
     <SelectedProductsList>
-      {selectedProducts.map((product) => {
+      {basketItems.map((product) => {
         const price = priceFormatter.format(product.price)
 
         return (
@@ -29,8 +60,17 @@ export function SelectedProducts() {
               </ItemLeftContainer>
               <ItemCentralContainer>
                 <p>{product.title}</p>
-                <QuantityInput />
-                <button type="button">
+                <QuantityInput
+                  itemId={product.id}
+                  quantity={product.quantity}
+                  onChange={handleQuantityChange}
+                  onIncrement={handleQuantityIncrement.bind(null, product)}
+                  onDecrement={handleQuantityDecrement.bind(null, product)}
+                />
+                <button
+                  type="button"
+                  onClick={handleRemoveButtonClick.bind(null, product)}
+                >
                   <Trash size={16} color={theme['purple-500']} />
                   Remove
                 </button>
