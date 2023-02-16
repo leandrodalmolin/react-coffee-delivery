@@ -43,5 +43,9 @@ export const HeaderActions = styled.div`
       background-color: ${({ theme }) => theme['yellow-700']};
       transform: translate(50%, -50%);
     }
+
+    &:hover {
+      color: ${({ theme }) => theme['yellow-700']};
+    }
   }
 `

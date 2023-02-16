@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 import { breakpoint } from '../../../../../styles/breakpoints'
 
-export const SelectedProductsList = styled.ul`
+export const OrderItemsList = styled.ul`
   list-style: none;
 `
 
-export const SelectedProductsItem = styled.li`
+export const OrderItemsItem = styled.li`
   display: grid;
   gap: 1.25rem;
   padding: 0.25rem;

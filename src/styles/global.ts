@@ -39,4 +39,14 @@ export const GlobalStyle = createGlobalStyle`
     white-space: nowrap; 
     width: 1px;
   }
+
+  a {
+    text-underline-offset: 0.1em;
+    color: ${(props) => props.theme['purple-700']};
+    transition: color ${(props) => props.theme['transition-duration']};
+
+    &:hover {
+      color: ${(props) => props.theme['purple-500']};
+    }
+  }
 `

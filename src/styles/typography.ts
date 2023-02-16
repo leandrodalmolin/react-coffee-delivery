@@ -24,5 +24,6 @@ export const HeadingMD = styled.h4`
 
 export const HeadingSm = styled.h5`
   ${HeadingBase}
+  margin-bottom: 0.25rem;
   font-size: 1.125rem;
 `

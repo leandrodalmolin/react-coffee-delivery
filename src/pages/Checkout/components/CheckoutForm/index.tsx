@@ -1,19 +1,21 @@
 import { CurrencyDollar, MapPinLine } from 'phosphor-react'
-import { FormEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { FormEvent, useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useTheme } from 'styled-components'
-import { HeadingMD } from '../../../../styles/typography'
+import { HeadingMD, HeadingSm } from '../../../../styles/typography'
 import { Card } from '../../../../components/Card'
 import { CardHeading } from '../../../../components/Card/CardHeading'
 import { DeliveryAddress } from './DeliveryAddress'
 import { OrderTotals } from './OrderTotals'
 import { PaymentOptions } from './PaymentOptions'
-import { SelectedProducts } from './SelectedProducts'
+import { OrderItems } from './OrderItems'
 import { CheckoutFormContainer, SubmitButton } from './styles'
+import { BasketContext } from '../../../../contexts/BasketContext'
 
 export function CheckoutForm() {
   const theme = useTheme()
   const navigate = useNavigate()
+  const { items: basketItems } = useContext(BasketContext)
 
   function handleFormSubmit(e: FormEvent) {
     e.preventDefault()
@@ -46,9 +48,22 @@ export function CheckoutForm() {
       <section>
         <HeadingMD>Selected coffees</HeadingMD>
         <Card borderRadius="uneven">
-          <SelectedProducts />
-          <OrderTotals />
-          <SubmitButton type="submit">Confirm order</SubmitButton>
+          {basketItems.length === 0 && (
+            <>
+              <HeadingSm>Oops, your basket is empty! </HeadingSm>
+              <p>
+                Please, <Link to="/">go back to the shop</Link> and select a few
+                items.
+              </p>
+            </>
+          )}
+          {basketItems.length > 0 && (
+            <>
+              <OrderItems />
+              <OrderTotals />
+              <SubmitButton type="submit">Confirm order</SubmitButton>
+            </>
+          )}
         </Card>
       </section>
     </CheckoutFormContainer>

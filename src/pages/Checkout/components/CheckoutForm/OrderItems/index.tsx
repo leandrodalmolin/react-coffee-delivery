@@ -6,15 +6,15 @@ import {
   ItemCentralContainer,
   ItemLeftContainer,
   ItemRightContainer,
-  SelectedProductsItem,
-  SelectedProductsList,
+  OrderItemsItem,
+  OrderItemsList,
 } from './styles'
 import { ChangeEvent, useContext } from 'react'
 import { BasketContext } from '../../../../../contexts/BasketContext'
 import { QuantityInput } from '../../../../../components/QuantityInput'
 import { BasketItem } from '../../../../../reducers/basket'
 
-export function SelectedProducts() {
+export function OrderItems() {
   const theme = useTheme()
   const {
     items: basketItems,
@@ -48,14 +48,14 @@ export function SelectedProducts() {
   }
 
   return (
-    <SelectedProductsList>
+    <OrderItemsList>
       {basketItems.map((product) => {
         const totalPrice = product.price * product.quantity
         const formattedTotalPrice = priceFormatter.format(totalPrice)
 
         return (
           <div key={product.id}>
-            <SelectedProductsItem>
+            <OrderItemsItem>
               <ItemLeftContainer>
                 <img src={product.image} alt={product.title} />
               </ItemLeftContainer>
@@ -77,11 +77,11 @@ export function SelectedProducts() {
                 </button>
               </ItemCentralContainer>
               <ItemRightContainer>{formattedTotalPrice}</ItemRightContainer>
-            </SelectedProductsItem>
+            </OrderItemsItem>
             <Divider />
           </div>
         )
       })}
-    </SelectedProductsList>
+    </OrderItemsList>
   )
 }
