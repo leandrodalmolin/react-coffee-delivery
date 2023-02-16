@@ -1,10 +1,4 @@
-import {
-  Bank,
-  CreditCard,
-  CurrencyDollar,
-  MapPinLine,
-  Money,
-} from 'phosphor-react'
+import { CurrencyDollar, MapPinLine } from 'phosphor-react'
 import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useTheme } from 'styled-components'
@@ -13,13 +7,11 @@ import { Card } from '../../../../components/Card'
 import { CardHeading } from '../../../../components/Card/CardHeading'
 import { DeliveryAddress } from './DeliveryAddress'
 import { OrderTotals } from './OrderTotals'
-import { PaymentOptions } from './PaymentOptions'
+import { PaymentOptions, PaymentOptionsType } from './PaymentOptions'
 import { OrderItems } from './OrderItems'
 import { CheckoutFormContainer, SubmitButton } from './styles'
 import { BasketContext } from '../../../../contexts/BasketContext'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
-
-export type PaymentOptionsType = 'debit' | 'credit' | 'cash'
 
 export interface CheckoutFormInputs {
   street: string
@@ -47,8 +39,10 @@ export function CheckoutForm() {
     formState: { isSubmitting },
   } = formMethods
 
-  const onFormSubmit: SubmitHandler<CheckoutFormInputs> = () => {
-    navigate('/success')
+  const onFormSubmit: SubmitHandler<CheckoutFormInputs> = (formData) => {
+    navigate('/success', {
+      state: formData,
+    })
   }
 
   return (
@@ -72,17 +66,7 @@ export function CheckoutForm() {
             >
               <CurrencyDollar size={22} color={theme['purple-700']} />
             </CardHeading>
-            <PaymentOptions
-              options={[
-                {
-                  label: 'Credit Card',
-                  value: 'credit',
-                  iconComponent: CreditCard,
-                },
-                { label: 'Debit Card', value: 'debit', iconComponent: Bank },
-                { label: 'Cash', value: 'cash', iconComponent: Money },
-              ]}
-            />
+            <PaymentOptions />
           </Card>
         </section>
         <section>

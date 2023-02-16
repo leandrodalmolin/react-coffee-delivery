@@ -5,9 +5,23 @@ import DeliverySvg from '../../assets/delivery-illustration.svg'
 import { RoundedIcon } from '../../components/RoundedIcon'
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
 import { useTheme } from 'styled-components'
+import { useLocation, Navigate } from 'react-router-dom'
+import { CheckoutFormInputs } from '../Checkout/components/CheckoutForm'
+import { paymentLabels } from '../Checkout/components/CheckoutForm/PaymentOptions'
+
+interface SuccessPageState {
+  state: CheckoutFormInputs
+}
 
 export function Success() {
   const theme = useTheme()
+  const { state } = useLocation() as SuccessPageState
+  console.log(state)
+
+  // Only allow access when traffic is coming from Checkout page
+  if (!state) {
+    return <Navigate to="/" replace={true} />
+  }
 
   return (
     <Wrapper>
@@ -24,9 +38,9 @@ export function Success() {
                   <MapPin weight="fill" />
                 </RoundedIcon>
                 <p>
-                  Delivery at <strong>Rua João Daniel Martinelli, 102</strong>
+                  Delivery at <strong>{state.street}</strong>
                   <br />
-                  Farrapos - Porto Alegre, RS
+                  {state.city}
                 </p>
               </li>
               <li>
@@ -46,7 +60,7 @@ export function Success() {
                 <p>
                   Payment method
                   <br />
-                  <strong>Credit Card</strong>
+                  <strong>{paymentLabels[state.payment]}</strong>
                 </p>
               </li>
             </SummaryList>
