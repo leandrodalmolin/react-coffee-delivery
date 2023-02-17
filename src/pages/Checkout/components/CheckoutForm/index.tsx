@@ -84,7 +84,7 @@ export function CheckoutForm() {
           <Card borderRadius="uneven">
             {basketItems.length === 0 && (
               <>
-                <HeadingSm>Oops, your basket is empty! </HeadingSm>
+                <HeadingSm>Oops, your basket is empty!</HeadingSm>
                 <p>
                   Please, <Link to="/">go back to the shop</Link> and select a
                   few items.

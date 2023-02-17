@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { breakpoint } from '../../../../../styles/breakpoints'
 
 export const DeliveryAddressContainer = styled.div`
@@ -43,4 +43,42 @@ export const DeliveryAddressContainer = styled.div`
       grid-column: 1 / span 3;
     }
   }
+`
+
+interface FormControlProps {
+  optional?: Boolean
+}
+
+export const FormControl = styled.div<FormControlProps>`
+  ${({ theme, optional }) => {
+    if (optional) {
+      const containerWidth = '4.5rem'
+
+      return css`
+        // Input wrapper
+        > div {
+          position: relative;
+
+          &::after {
+            content: 'Optional';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: ${containerWidth};
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-style: italic;
+            color: ${theme['base-600']};
+          }
+
+          input {
+            padding-right: ${containerWidth};
+          }
+        }
+      `
+    }
+  }}
 `

@@ -1,64 +1,24 @@
-import { useFormContext } from 'react-hook-form'
-import { CheckoutFormInputs } from '..'
-import { ErrorMessage } from '../styles'
-import { DeliveryAddressContainer } from './styles'
+import { DeliveryAddressContainer, FormControl } from './styles'
+import { TextInput } from './TextInput'
 
 export function DeliveryAddress() {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext<CheckoutFormInputs>()
-
   return (
     <DeliveryAddressContainer>
-      <div className="span-full">
-        <label htmlFor="street" className="visually-hidden">
-          House number and street name
-        </label>
-        <input
-          {...register('street')}
-          placeholder="House number and street name"
-          aria-invalid={errors.street ? 'true' : 'false'}
-        />
-        {errors.street && (
-          <ErrorMessage role="alert">{errors.street.message}</ErrorMessage>
-        )}
-      </div>
+      <FormControl className="span-full">
+        <TextInput field="street" label="House number and street name" />
+      </FormControl>
 
-      <div>
-        <label htmlFor="city" className="visually-hidden">
-          Town / City
-        </label>
-        <input
-          {...register('city')}
-          placeholder="Town / City"
-          aria-invalid={errors.city ? 'true' : 'false'}
-        />
-        {errors.city && (
-          <ErrorMessage role="alert">{errors.city.message}</ErrorMessage>
-        )}
-      </div>
+      <FormControl>
+        <TextInput field="city" label="Town / City" />
+      </FormControl>
 
-      <div>
-        <label htmlFor="county" className="visually-hidden">
-          County (Optional)
-        </label>
-        <input {...register('county')} placeholder="County (Optional)" />
-      </div>
+      <FormControl optional>
+        <TextInput field="county" label="County" />
+      </FormControl>
 
-      <div>
-        <label htmlFor="postcode" className="visually-hidden">
-          Postcode
-        </label>
-        <input
-          {...register('postcode')}
-          placeholder="Postcode"
-          aria-invalid={errors.postcode ? 'true' : 'false'}
-        />
-        {errors.postcode && (
-          <ErrorMessage role="alert">{errors.postcode.message}</ErrorMessage>
-        )}
-      </div>
+      <FormControl>
+        <TextInput field="postcode" label="Postcode" />
+      </FormControl>
     </DeliveryAddressContainer>
   )
 }

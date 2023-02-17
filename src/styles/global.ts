@@ -29,7 +29,7 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 1rem;
   }
 
-    // SR only
+  // SR only
   .visually-hidden {
     clip: rect(0 0 0 0); 
     clip-path: inset(50%);
@@ -40,6 +40,7 @@ export const GlobalStyle = createGlobalStyle`
     width: 1px;
   }
 
+  // Links
   a {
     text-underline-offset: 0.1em;
     color: ${(props) => props.theme['purple-700']};
