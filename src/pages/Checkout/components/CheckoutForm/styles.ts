@@ -1,6 +1,17 @@
 import styled from 'styled-components'
 import { breakpoint } from '../../../../styles/breakpoints'
 
+export const EmptyBasketNotice = styled.article`
+  svg {
+    margin-bottom: 0.5rem;
+    color: ${({ theme }) => theme['yellow-700']};
+  }
+
+  p {
+    margin: 0.3rem 0;
+  }
+`
+
 export const CheckoutFormContainer = styled.form`
   display: grid;
   gap: 2rem;
