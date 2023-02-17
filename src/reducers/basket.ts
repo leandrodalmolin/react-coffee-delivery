@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 export enum ActionTypes {
   ADD_ITEM = 'ADD_ITEM',
+  UPDATE_ITEM = 'UPDATE_ITEM',
   REMOVE_ITEM = 'REMOVE_ITEM',
   CLEAR_BASKET = 'CLEAR_BASKET',
 }
@@ -23,51 +24,35 @@ export const defaultBasketState = {
 
 export function basketReducer(state: BasketState, action: any) {
   /**
-   * Add to basket
+   * Add item
    */
   if (action.type === ActionTypes.ADD_ITEM) {
-    const item = state.items.find((item) => item.id === action.item.id)
-
-    // Remove item
-    if (item && action.item.quantity === 0) {
-      return {
-        items: state.items.filter((product) => product !== item),
-      }
-    }
-    // Update item
-    else if (item && action.item.quantity > 0) {
-      const itemIndex = state.items.findIndex((product) => product === item)
-      const updatedItems = [...state.items]
-      updatedItems[itemIndex] = action.item
-      return {
-        items: updatedItems,
-      }
-    }
-    // New item
-    else if (!item && action.item.quantity > 0) {
-      return {
-        items: [...state.items, action.item],
-      }
-    }
-
     return {
-      items: state.items,
+      items: [...state.items, action.item],
     }
   }
 
   /**
-   * Remove from basket
+   * Update item
    */
-  if (action.type === ActionTypes.REMOVE_ITEM) {
-    const item = state.items.find((item) => item.id === action.item.id)
-    if (item) {
-      return {
-        items: state.items.filter((product) => product !== item),
-      }
-    }
+  if (action.type === ActionTypes.UPDATE_ITEM) {
+    const itemIndex = state.items.findIndex(
+      (product) => product.id === action.item.id,
+    )
+    const updatedItems = [...state.items]
+    updatedItems[itemIndex] = action.item
 
     return {
-      items: state.items,
+      items: updatedItems,
+    }
+  }
+
+  /**
+   * Remove item
+   */
+  if (action.type === ActionTypes.REMOVE_ITEM) {
+    return {
+      items: state.items.filter((product) => product.id !== action.item.id),
     }
   }
 

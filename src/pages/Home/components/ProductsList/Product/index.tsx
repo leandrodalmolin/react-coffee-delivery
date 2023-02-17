@@ -14,7 +14,12 @@ type FormInputs = BasketItem
 
 export function Product(product: ProductType) {
   const { id, title, description, image, tags, price } = product
-  const { addItemToBasket } = useContext(BasketContext)
+  const {
+    addBasketItem,
+    removeBasketItem,
+    updateBasketItem,
+    findBasketItemById,
+  } = useContext(BasketContext)
 
   const { register, handleSubmit, control } = useForm<FormInputs>({
     defaultValues: {
@@ -26,14 +31,19 @@ export function Product(product: ProductType) {
     },
   })
 
-  const onFormSubmit: SubmitHandler<FormInputs> = (formData) => {
-    addItemToBasket({
-      id: formData.id,
-      title: formData.title,
-      price: formData.price,
-      quantity: formData.quantity,
-      image: formData.image,
-    })
+  const onFormSubmit: SubmitHandler<FormInputs> = (submittedItem) => {
+    const item = findBasketItemById(submittedItem.id)
+
+    if (!item && submittedItem.quantity > 0) {
+      addBasketItem({ ...submittedItem })
+      return
+    }
+
+    if (submittedItem.quantity === 0) {
+      removeBasketItem(submittedItem)
+    } else {
+      updateBasketItem(submittedItem)
+    }
   }
 
   return (

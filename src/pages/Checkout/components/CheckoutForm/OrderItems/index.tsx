@@ -18,20 +18,25 @@ export function OrderItems() {
   const theme = useTheme()
   const {
     items: basketItems,
-    addItemToBasket,
-    removeItemFromBasket,
+    updateBasketItem,
+    removeBasketItem,
   } = useContext(BasketContext)
 
   function handleQuantityIncrement(item: BasketItem) {
-    if (item.quantity < 99) {
-      addItemToBasket({ ...item, quantity: item.quantity + 1 })
+    const newQuantity = item.quantity + 1
+    if (newQuantity < 99) {
+      updateBasketItem({ ...item, quantity: newQuantity })
     }
   }
 
   function handleQuantityDecrement(item: BasketItem) {
-    if (item.quantity > 0) {
-      addItemToBasket({ ...item, quantity: item.quantity - 1 })
+    const newQuantity = item.quantity - 1
+    if (newQuantity > 0) {
+      updateBasketItem({ ...item, quantity: newQuantity })
+      return
     }
+
+    removeBasketItem(item)
   }
 
   function handleQuantityChange(event: ChangeEvent<HTMLInputElement>) {
@@ -40,11 +45,16 @@ export function OrderItems() {
     if (!item) return
 
     const newQuantity = Number(event.target.value)
-    addItemToBasket({ ...item, quantity: newQuantity })
+    if (newQuantity > 0) {
+      updateBasketItem({ ...item, quantity: newQuantity })
+      return
+    }
+
+    removeBasketItem(item)
   }
 
   function handleRemoveButtonClick(item: BasketItem) {
-    removeItemFromBasket(item)
+    removeBasketItem(item)
   }
 
   return (

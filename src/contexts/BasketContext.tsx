@@ -10,8 +10,10 @@ interface BasketContextType {
   items: BasketItem[]
   deliveryCost: number
   totalAmount: number
-  addItemToBasket: (item: BasketItem) => void
-  removeItemFromBasket: (item: BasketItem) => void
+  addBasketItem: (item: BasketItem) => void
+  removeBasketItem: (item: BasketItem) => void
+  updateBasketItem: (item: BasketItem) => void
+  findBasketItemById: (id: string) => BasketItem
   clearBasket: () => void
 }
 
@@ -32,16 +34,24 @@ export function BasketContextProvider({
   // Hardcoded delivery for now
   const deliveryCost = 3.5
 
-  function addItemToBasket(item: BasketItem) {
+  function addBasketItem(item: BasketItem) {
     dispatchBasketAction({ type: ActionTypes.ADD_ITEM, item })
   }
 
-  function removeItemFromBasket(item: BasketItem) {
+  function updateBasketItem(item: BasketItem) {
+    dispatchBasketAction({ type: ActionTypes.UPDATE_ITEM, item })
+  }
+
+  function removeBasketItem(item: BasketItem) {
     dispatchBasketAction({ type: ActionTypes.REMOVE_ITEM, item })
   }
 
   function clearBasket() {
     dispatchBasketAction({ type: ActionTypes.CLEAR_BASKET })
+  }
+
+  function findBasketItemById(id: string) {
+    return basketState.items.find((item) => item.id === id)
   }
 
   // Watch for changes and it doesn't recalculate
@@ -59,8 +69,10 @@ export function BasketContextProvider({
         items: basketState.items,
         deliveryCost,
         totalAmount,
-        addItemToBasket,
-        removeItemFromBasket,
+        addBasketItem,
+        updateBasketItem,
+        removeBasketItem,
+        findBasketItemById,
         clearBasket,
       }}
     >
