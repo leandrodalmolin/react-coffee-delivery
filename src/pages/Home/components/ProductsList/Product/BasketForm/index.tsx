@@ -16,14 +16,10 @@ interface BasketFormProps {
 export function BasketForm({ product }: BasketFormProps) {
   const { id, title, image, price } = product
 
-  const {
-    addBasketItem,
-    removeBasketItem,
-    updateBasketItem,
-    findBasketItemById,
-  } = useContext(BasketContext)
+  const { addBasketItem, updateBasketItem, findBasketItemById } =
+    useContext(BasketContext)
 
-  const { register, handleSubmit, control } = useForm<FormInputs>({
+  const { register, handleSubmit, control, reset } = useForm<FormInputs>({
     defaultValues: {
       id,
       title,
@@ -34,18 +30,26 @@ export function BasketForm({ product }: BasketFormProps) {
   })
 
   const onFormSubmit: SubmitHandler<FormInputs> = (submittedItem) => {
-    const item = findBasketItemById(submittedItem.id)
-
-    if (!item && submittedItem.quantity > 0) {
-      addBasketItem({ ...submittedItem })
+    // TODO: add proper feedback
+    if (submittedItem.quantity === 0) {
+      alert('Enter quantity')
       return
     }
 
-    if (submittedItem.quantity === 0) {
-      removeBasketItem(submittedItem)
-    } else {
-      updateBasketItem(submittedItem)
+    const item = findBasketItemById(submittedItem.id)
+
+    // Update item
+    if (item) {
+      const newQuantity = item.quantity + submittedItem.quantity
+      updateBasketItem({ ...submittedItem, quantity: newQuantity })
     }
+
+    // Add new item
+    else {
+      addBasketItem({ ...submittedItem })
+    }
+
+    reset()
   }
 
   return (
