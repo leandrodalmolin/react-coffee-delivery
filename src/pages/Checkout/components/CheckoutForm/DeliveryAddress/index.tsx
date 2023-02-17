@@ -16,7 +16,7 @@ export function DeliveryAddress() {
           House number and street name
         </label>
         <input
-          {...register('street', { required: 'Please enter street name' })}
+          {...register('street')}
           placeholder="House number and street name"
           aria-invalid={errors.street ? 'true' : 'false'}
         />
@@ -30,7 +30,7 @@ export function DeliveryAddress() {
           Town / City
         </label>
         <input
-          {...register('city', { required: 'Please enter city name' })}
+          {...register('city')}
           placeholder="Town / City"
           aria-invalid={errors.city ? 'true' : 'false'}
         />
@@ -51,7 +51,7 @@ export function DeliveryAddress() {
           Postcode
         </label>
         <input
-          {...register('postcode', { required: 'Please enter postcode' })}
+          {...register('postcode')}
           placeholder="Postcode"
           aria-invalid={errors.postcode ? 'true' : 'false'}
         />

@@ -7,19 +7,28 @@ import { Card } from '../../../../components/Card'
 import { CardHeading } from '../../../../components/Card/CardHeading'
 import { DeliveryAddress } from './DeliveryAddress'
 import { OrderTotals } from './OrderTotals'
-import { PaymentOptions, PaymentOptionsType } from './PaymentOptions'
+import { PaymentOptions } from './PaymentOptions'
 import { OrderItems } from './OrderItems'
 import { CheckoutFormContainer, SubmitButton } from './styles'
 import { BasketContext } from '../../../../contexts/BasketContext'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 
-export interface CheckoutFormInputs {
-  street: string
-  city: string
-  county: string
-  postcode: string
-  payment: PaymentOptionsType
-}
+const paymentEnum = z.enum(['debit', 'credit', 'cash'], {
+  required_error: 'Please select a payment method',
+})
+
+const checkoutFormSchema = z.object({
+  street: z.string().min(1, { message: 'Please enter a street name' }),
+  city: z.string().min(1, { message: 'Please enter a city name' }),
+  county: z.string(),
+  postcode: z.string().min(1, { message: 'Please enter a postcode' }),
+  payment: paymentEnum,
+})
+
+export type PaymentOptionsType = z.infer<typeof paymentEnum>
+export type CheckoutFormInputs = z.infer<typeof checkoutFormSchema>
 
 export function CheckoutForm() {
   const theme = useTheme()
@@ -27,6 +36,7 @@ export function CheckoutForm() {
   const { items: basketItems } = useContext(BasketContext)
 
   const formMethods = useForm<CheckoutFormInputs>({
+    resolver: zodResolver(checkoutFormSchema),
     defaultValues: {
       street: '',
       city: '',

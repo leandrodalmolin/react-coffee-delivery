@@ -1,29 +1,17 @@
-import Icon, { Bank, CreditCard, Money } from 'phosphor-react'
+import { Bank, CreditCard, Money } from 'phosphor-react'
 import { Controller, useFormContext } from 'react-hook-form'
-import { CheckoutFormInputs } from '..'
+import { CheckoutFormInputs, PaymentOptionsType } from '..'
 import { ErrorMessage } from '../styles'
 import { ToggleItem, ToggleRoot } from './styles'
 
-type PaymentLabelsType = {
-  debit: string
-  credit: string
-  cash: string
-}
-
-export type PaymentOptionsType = keyof PaymentLabelsType
-
 // Being used on the Success page too
+/* eslint-disable no-unused-vars */
 export const paymentLabels = {
   debit: 'Debit Card',
   credit: 'Credit Card',
   cash: 'Cash',
-} as PaymentLabelsType
-
-type PaymentOptionType = {
-  iconComponent: Icon.Icon
-  label: string
-  value: PaymentOptionsType
-}
+} as { [key in PaymentOptionsType]: string }
+/* eslint-enable no-unused-vars */
 
 export function PaymentOptions() {
   const { control } = useFormContext<CheckoutFormInputs>()
@@ -46,13 +34,12 @@ export function PaymentOptions() {
       value: 'cash',
       iconComponent: Money,
     },
-  ] as PaymentOptionType[]
+  ]
 
   return (
     <Controller
       name="payment"
       control={control}
-      rules={{ required: 'Please select a payment method' }}
       render={({ field: { onChange }, formState: { errors } }) => (
         <>
           <ToggleRoot
