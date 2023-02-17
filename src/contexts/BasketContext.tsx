@@ -1,10 +1,16 @@
-import { createContext, ReactNode, useMemo, useReducer } from 'react'
+import { createContext, ReactNode, useEffect, useMemo, useReducer } from 'react'
 import {
   ActionTypes,
   BasketItem,
   basketReducer,
   defaultBasketState,
 } from '../reducers/basket'
+
+/**
+ * Constants
+ */
+const LOCAL_STORAGE_TAG = '@coffee-delivery:basket-state-1.0.0'
+const DELIVERY_COST = 3.5
 
 interface BasketContextType {
   items: BasketItem[]
@@ -29,10 +35,23 @@ export function BasketContextProvider({
   const [basketState, dispatchBasketAction] = useReducer(
     basketReducer,
     defaultBasketState,
+    // Fetch initial data from localStorage (if any)
+    () => {
+      const storedStateJSON = localStorage.getItem(LOCAL_STORAGE_TAG)
+      if (storedStateJSON) {
+        return JSON.parse(storedStateJSON)
+      }
+    },
   )
 
+  // Persist state into the localStorage
+  useEffect(() => {
+    const stateJSON = JSON.stringify(basketState)
+    localStorage.setItem(LOCAL_STORAGE_TAG, stateJSON)
+  }, [basketState])
+
   // Hardcoded delivery for now
-  const deliveryCost = 3.5
+  const deliveryCost = DELIVERY_COST
 
   function addBasketItem(item: BasketItem) {
     dispatchBasketAction({ type: ActionTypes.ADD_ITEM, item })
