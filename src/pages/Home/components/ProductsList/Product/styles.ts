@@ -25,28 +25,3 @@ export const ProductContainer = styled.div`
     margin-top: 2rem;
   }
 `
-
-export const AddToBasketForm = styled.form`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-
-  // Basket button
-  > button {
-    border: 0;
-    border-radius: 6px;
-    padding: 0.5rem;
-    color: ${({ theme }) => theme.white};
-    background-color: ${({ theme }) => theme['purple-700']};
-    cursor: pointer;
-    transition: background-color ${({ theme }) => theme['transition-duration']};
-
-    svg {
-      display: block;
-    }
-
-    &:hover {
-      background-color: ${({ theme }) => theme['purple-500']};
-    }
-  }
-`

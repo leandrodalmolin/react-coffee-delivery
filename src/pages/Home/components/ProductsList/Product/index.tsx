@@ -1,50 +1,12 @@
-import { useContext } from 'react'
-import { useForm, SubmitHandler, Controller } from 'react-hook-form'
-import { BasketContext } from '../../../../../contexts/BasketContext'
 import { TagsList } from './TagsList'
 import { HeadingMD } from '../../../../../styles/typography'
 import { PriceTag } from './PriceTag'
-import { ShoppingCartSimple } from 'phosphor-react'
-import { ProductContainer, AddToBasketForm } from './styles'
-import { QuantityInput } from '../../../../../components/QuantityInput'
-import { BasketItem } from '../../../../../reducers/basket'
+import { ProductContainer } from './styles'
 import { ProductType } from '../../../../../data'
-
-type FormInputs = BasketItem
+import { BasketForm } from './BasketForm'
 
 export function Product(product: ProductType) {
-  const { id, title, description, image, tags, price } = product
-  const {
-    addBasketItem,
-    removeBasketItem,
-    updateBasketItem,
-    findBasketItemById,
-  } = useContext(BasketContext)
-
-  const { register, handleSubmit, control } = useForm<FormInputs>({
-    defaultValues: {
-      id,
-      title,
-      price,
-      quantity: 0,
-      image,
-    },
-  })
-
-  const onFormSubmit: SubmitHandler<FormInputs> = (submittedItem) => {
-    const item = findBasketItemById(submittedItem.id)
-
-    if (!item && submittedItem.quantity > 0) {
-      addBasketItem({ ...submittedItem })
-      return
-    }
-
-    if (submittedItem.quantity === 0) {
-      removeBasketItem(submittedItem)
-    } else {
-      updateBasketItem(submittedItem)
-    }
-  }
+  const { title, description, image, tags, price } = product
 
   return (
     <ProductContainer>
@@ -56,29 +18,7 @@ export function Product(product: ProductType) {
       </div>
       <footer>
         <PriceTag price={price} />
-        <AddToBasketForm onSubmit={handleSubmit(onFormSubmit)}>
-          <input type="hidden" {...register('id')} />
-          <input type="hidden" {...register('title')} />
-          <input type="hidden" {...register('price')} />
-          <input type="hidden" {...register('image')} />
-
-          <Controller
-            name="quantity"
-            control={control}
-            render={({ field: { onChange, value } }) => (
-              <QuantityInput
-                onChange={(e) => onChange(Number(e.target.value))}
-                onIncrement={() => value < 99 && onChange(value + 1)}
-                onDecrement={() => value > 0 && onChange(value - 1)}
-                quantity={value}
-              />
-            )}
-          />
-
-          <button type="submit">
-            <ShoppingCartSimple size={22} weight="fill" />
-          </button>
-        </AddToBasketForm>
+        <BasketForm product={product} />
       </footer>
     </ProductContainer>
   )
