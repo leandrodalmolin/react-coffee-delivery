@@ -36,11 +36,13 @@ export function BasketContextProvider({
     basketReducer,
     defaultBasketState,
     // Fetch initial data from localStorage (if any)
-    () => {
+    (initialBasketState) => {
       const storedStateJSON = localStorage.getItem(LOCAL_STORAGE_TAG)
       if (storedStateJSON) {
         return JSON.parse(storedStateJSON)
       }
+
+      return initialBasketState
     },
   )
 
