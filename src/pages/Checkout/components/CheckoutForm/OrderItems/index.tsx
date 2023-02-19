@@ -24,7 +24,7 @@ export function OrderItems() {
 
   function handleQuantityIncrement(item: BasketItem) {
     const newQuantity = item.quantity + 1
-    if (newQuantity < 99) {
+    if (newQuantity < 100) {
       updateBasketItem({ ...item, quantity: newQuantity })
     }
   }
@@ -33,10 +33,7 @@ export function OrderItems() {
     const newQuantity = item.quantity - 1
     if (newQuantity > 0) {
       updateBasketItem({ ...item, quantity: newQuantity })
-      return
     }
-
-    removeBasketItem(item)
   }
 
   function handleQuantityChange(event: ChangeEvent<HTMLInputElement>) {
@@ -45,12 +42,13 @@ export function OrderItems() {
     if (!item) return
 
     const newQuantity = Number(event.target.value)
-    if (newQuantity > 0) {
-      updateBasketItem({ ...item, quantity: newQuantity })
+    if (newQuantity > 99) {
       return
     }
 
-    removeBasketItem(item)
+    if (newQuantity > 0) {
+      updateBasketItem({ ...item, quantity: newQuantity })
+    }
   }
 
   function handleRemoveButtonClick(item: BasketItem) {
