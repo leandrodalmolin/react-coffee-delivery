@@ -32,6 +32,7 @@ export const QuantityInputContainer = styled.div`
 
 export const InputNumber = styled.input`
   border: 0;
+  width: 23px; // enough room for 2 digits
   font-size: 1rem;
   color: ${({ theme }) => theme['base-900']};
   background-color: transparent;

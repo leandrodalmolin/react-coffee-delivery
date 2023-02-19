@@ -1,41 +1,45 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { ShoppingCartSimple } from 'phosphor-react'
 import { useContext } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { z, ZodSchema } from 'zod'
 import { QuantityInput } from '../../../../../../components/QuantityInput'
 import { BasketContext } from '../../../../../../contexts/BasketContext'
 import { ProductType } from '../../../../../../data'
 import { BasketItem } from '../../../../../../reducers/basket'
 import { BasketFormContainer } from './style'
 
-type FormInputs = BasketItem
+const basketFormSchema: ZodSchema<BasketItem> = z.object({
+  id: z.string(),
+  title: z.string(),
+  price: z.number(),
+  quantity: z.number().min(1).max(99),
+  image: z.string(),
+})
+
+type CheckoutFormInputs = z.infer<typeof basketFormSchema>
 
 interface BasketFormProps {
   product: ProductType
 }
 
 export function BasketForm({ product }: BasketFormProps) {
-  const { id, title, image, price } = product
-
   const { addBasketItem, updateBasketItem, findBasketItemById } =
     useContext(BasketContext)
 
-  const { register, handleSubmit, control, reset } = useForm<FormInputs>({
-    defaultValues: {
-      id,
-      title,
-      price,
-      quantity: 0,
-      image,
-    },
-  })
+  const { register, handleSubmit, control, reset } =
+    useForm<CheckoutFormInputs>({
+      resolver: zodResolver(basketFormSchema),
+      defaultValues: {
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        image: product.image,
+        quantity: 1,
+      },
+    })
 
-  const onFormSubmit: SubmitHandler<FormInputs> = (submittedItem) => {
-    // TODO: add proper feedback
-    if (submittedItem.quantity === 0) {
-      alert('Enter quantity')
-      return
-    }
-
+  const onFormSubmit: SubmitHandler<CheckoutFormInputs> = (submittedItem) => {
     const item = findBasketItemById(submittedItem.id)
 
     // Update item
@@ -52,6 +56,20 @@ export function BasketForm({ product }: BasketFormProps) {
     reset()
   }
 
+  function isQuantityValid(value: number) {
+    const { success } = basketFormSchema.safeParse({
+      ...product,
+      quantity: value,
+    })
+
+    // TODO: add proper feedback
+    if (!success) {
+      console.error('Invalid quantity')
+    }
+
+    return success
+  }
+
   return (
     <BasketFormContainer onSubmit={handleSubmit(onFormSubmit)}>
       <input type="hidden" {...register('id')} />
@@ -64,9 +82,16 @@ export function BasketForm({ product }: BasketFormProps) {
         control={control}
         render={({ field: { onChange, value } }) => (
           <QuantityInput
-            onChange={(e) => onChange(Number(e.target.value))}
-            onIncrement={() => value < 99 && onChange(value + 1)}
-            onDecrement={() => value > 0 && onChange(value - 1)}
+            onChange={(e) =>
+              isQuantityValid(Number(e.target.value)) &&
+              onChange(Number(e.target.value))
+            }
+            onIncrement={() =>
+              isQuantityValid(value + 1) && onChange(value + 1)
+            }
+            onDecrement={() =>
+              isQuantityValid(value - 1) && onChange(value - 1)
+            }
             quantity={value}
           />
         )}

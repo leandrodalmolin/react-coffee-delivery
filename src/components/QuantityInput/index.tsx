@@ -27,8 +27,6 @@ export function QuantityInput({
       <InputNumber
         data-item-id={itemId}
         type="number"
-        min={0}
-        max={99}
         value={quantity}
         onChange={onChange}
       />
