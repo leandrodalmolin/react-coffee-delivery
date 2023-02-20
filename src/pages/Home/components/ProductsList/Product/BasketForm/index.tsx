@@ -1,9 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ShoppingCartSimple } from 'phosphor-react'
-import { useContext } from 'react'
+import { useContext, useRef } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 import { z, ZodSchema } from 'zod'
 import { QuantityInput } from '../../../../../../components/QuantityInput'
+import { Toast, ToastRefType } from '../../../../../../components/Toast'
 import { BasketContext } from '../../../../../../contexts/BasketContext'
 import { ProductType } from '../../../../../../data'
 import { BasketItem } from '../../../../../../reducers/basket'
@@ -24,6 +26,8 @@ interface BasketFormProps {
 }
 
 export function BasketForm({ product }: BasketFormProps) {
+  const toastRef = useRef<ToastRefType>(null)
+
   const { addBasketItem, updateBasketItem, findBasketItemById } =
     useContext(BasketContext)
 
@@ -53,6 +57,7 @@ export function BasketForm({ product }: BasketFormProps) {
       addBasketItem({ ...submittedItem })
     }
 
+    toastRef.current?.notify()
     reset()
   }
 
@@ -71,35 +76,47 @@ export function BasketForm({ product }: BasketFormProps) {
   }
 
   return (
-    <BasketFormContainer onSubmit={handleSubmit(onFormSubmit)}>
-      <input type="hidden" {...register('id')} />
-      <input type="hidden" {...register('title')} />
-      <input type="hidden" {...register('price')} />
-      <input type="hidden" {...register('image')} />
+    <>
+      <Toast
+        ref={toastRef}
+        title="Basket Updated"
+        description={`${product.title} has been added to your basket.`}
+        actionAltText="View basket"
+        type="foreground"
+      >
+        <Link to="/checkout">View basket</Link>
+      </Toast>
 
-      <Controller
-        name="quantity"
-        control={control}
-        render={({ field: { onChange, value } }) => (
-          <QuantityInput
-            onChange={(e) =>
-              isQuantityValid(Number(e.target.value)) &&
-              onChange(Number(e.target.value))
-            }
-            onIncrement={() =>
-              isQuantityValid(value + 1) && onChange(value + 1)
-            }
-            onDecrement={() =>
-              isQuantityValid(value - 1) && onChange(value - 1)
-            }
-            quantity={value}
-          />
-        )}
-      />
+      <BasketFormContainer onSubmit={handleSubmit(onFormSubmit)}>
+        <input type="hidden" {...register('id')} />
+        <input type="hidden" {...register('title')} />
+        <input type="hidden" {...register('price')} />
+        <input type="hidden" {...register('image')} />
 
-      <button type="submit">
-        <ShoppingCartSimple size={22} weight="fill" />
-      </button>
-    </BasketFormContainer>
+        <Controller
+          name="quantity"
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <QuantityInput
+              onChange={(e) =>
+                isQuantityValid(Number(e.target.value)) &&
+                onChange(Number(e.target.value))
+              }
+              onIncrement={() =>
+                isQuantityValid(value + 1) && onChange(value + 1)
+              }
+              onDecrement={() =>
+                isQuantityValid(value - 1) && onChange(value - 1)
+              }
+              quantity={value}
+            />
+          )}
+        />
+
+        <button type="submit">
+          <ShoppingCartSimple size={22} weight="fill" />
+        </button>
+      </BasketFormContainer>
+    </>
   )
 }
