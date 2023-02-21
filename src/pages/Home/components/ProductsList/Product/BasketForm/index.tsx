@@ -6,7 +6,11 @@ import { Link } from 'react-router-dom'
 import { z, ZodSchema } from 'zod'
 import { QuantityInput } from '../../../../../../components/QuantityInput'
 import { Toast, ToastRefType } from '../../../../../../components/Toast'
-import { BasketContext } from '../../../../../../contexts/BasketContext'
+import {
+  BasketContext,
+  QUANTITY_THRESHOLD_MAX,
+  QUANTITY_THRESHOLD_MIN,
+} from '../../../../../../contexts/BasketContext'
 import { ProductType } from '../../../../../../data'
 import { BasketItem } from '../../../../../../reducers/basket'
 import { BasketFormContainer } from './style'
@@ -15,7 +19,7 @@ const basketFormSchema: ZodSchema<BasketItem> = z.object({
   id: z.string(),
   title: z.string(),
   price: z.number(),
-  quantity: z.number().min(1).max(99),
+  quantity: z.number().min(QUANTITY_THRESHOLD_MIN).max(QUANTITY_THRESHOLD_MAX),
   image: z.string(),
 })
 
@@ -26,7 +30,9 @@ interface BasketFormProps {
 }
 
 export function BasketForm({ product }: BasketFormProps) {
-  const toastRef = useRef<ToastRefType>(null)
+  const basketUpdateToastRef = useRef<ToastRefType>(null)
+  const quantityUpdateToastRef = useRef<ToastRefType>(null)
+  const basketItemLimitToastRef = useRef<ToastRefType>(null)
 
   const { addBasketItem, updateBasketItem, findBasketItemById } =
     useContext(BasketContext)
@@ -49,6 +55,12 @@ export function BasketForm({ product }: BasketFormProps) {
     // Update item
     if (item) {
       const newQuantity = item.quantity + submittedItem.quantity
+
+      if (newQuantity > QUANTITY_THRESHOLD_MAX) {
+        basketItemLimitToastRef.current?.notify()
+        return
+      }
+
       updateBasketItem({ ...submittedItem, quantity: newQuantity })
     }
 
@@ -57,7 +69,7 @@ export function BasketForm({ product }: BasketFormProps) {
       addBasketItem({ ...submittedItem })
     }
 
-    toastRef.current?.notify()
+    basketUpdateToastRef.current?.notify()
     reset()
   }
 
@@ -67,9 +79,8 @@ export function BasketForm({ product }: BasketFormProps) {
       quantity: value,
     })
 
-    // TODO: add proper feedback
     if (!success) {
-      console.error('Invalid quantity')
+      quantityUpdateToastRef.current?.notify()
     }
 
     return success
@@ -78,7 +89,7 @@ export function BasketForm({ product }: BasketFormProps) {
   return (
     <>
       <Toast
-        ref={toastRef}
+        ref={basketUpdateToastRef}
         title="Basket Updated"
         description={`${product.title} has been added to your basket.`}
         actionAltText="View basket"
@@ -86,6 +97,20 @@ export function BasketForm({ product }: BasketFormProps) {
       >
         <Link to="/checkout">View basket</Link>
       </Toast>
+
+      <Toast
+        ref={quantityUpdateToastRef}
+        title="Invalid Quantity"
+        description={`Quantity must be between ${QUANTITY_THRESHOLD_MIN} and ${QUANTITY_THRESHOLD_MAX}.`}
+        type="foreground"
+      />
+
+      <Toast
+        ref={basketItemLimitToastRef}
+        title="Basket Item Limit"
+        description={`You can only add ${QUANTITY_THRESHOLD_MAX} items of this product to your basket.`}
+        type="foreground"
+      />
 
       <BasketFormContainer onSubmit={handleSubmit(onFormSubmit)}>
         <input type="hidden" {...register('id')} />
@@ -98,6 +123,9 @@ export function BasketForm({ product }: BasketFormProps) {
           control={control}
           render={({ field: { onChange, value } }) => (
             <QuantityInput
+              quantity={value}
+              disableDecrementButton={value === QUANTITY_THRESHOLD_MIN}
+              disableIncrementButton={value >= QUANTITY_THRESHOLD_MAX}
               onChange={(e) =>
                 isQuantityValid(Number(e.target.value)) &&
                 onChange(Number(e.target.value))
@@ -108,7 +136,6 @@ export function BasketForm({ product }: BasketFormProps) {
               onDecrement={() =>
                 isQuantityValid(value - 1) && onChange(value - 1)
               }
-              quantity={value}
             />
           )}
         />
