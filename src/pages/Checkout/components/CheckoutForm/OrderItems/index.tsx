@@ -9,7 +9,7 @@ import {
   OrderItemsItem,
   OrderItemsList,
 } from './styles'
-import { ChangeEvent, useContext } from 'react'
+import { ChangeEvent, useContext, useRef } from 'react'
 import {
   BasketContext,
   QUANTITY_THRESHOLD_MAX,
@@ -17,6 +17,7 @@ import {
 } from '../../../../../contexts/BasketContext'
 import { QuantityInput } from '../../../../../components/QuantityInput'
 import { BasketItem } from '../../../../../reducers/basket'
+import { Toast, ToastRefType } from '../../../../../components/Toast'
 
 export function OrderItems() {
   const theme = useTheme()
@@ -25,6 +26,8 @@ export function OrderItems() {
     updateBasketItem,
     removeBasketItem,
   } = useContext(BasketContext)
+
+  const quantityValidationToastRef = useRef<ToastRefType>(null)
 
   function handleQuantityIncrement(item: BasketItem) {
     const newQuantity = item.quantity + 1
@@ -45,61 +48,77 @@ export function OrderItems() {
     const item = basketItems.find((product) => product.id === itemId)
     if (!item) return
 
+    // Update basket item
     const newQuantity = Number(event.target.value)
-    if (newQuantity > QUANTITY_THRESHOLD_MAX) {
+    if (isQuantityValid(newQuantity)) {
+      updateBasketItem({ ...item, quantity: newQuantity })
       return
     }
 
-    if (newQuantity > QUANTITY_THRESHOLD_MIN) {
-      updateBasketItem({ ...item, quantity: newQuantity })
-    }
+    // Notify invalid quantity
+    quantityValidationToastRef.current?.notify()
   }
 
   function handleRemoveButtonClick(item: BasketItem) {
     removeBasketItem(item)
   }
 
-  return (
-    <OrderItemsList>
-      {basketItems.map((product) => {
-        const totalPrice = product.price * product.quantity
-        const formattedTotalPrice = priceFormatter.format(totalPrice)
+  function isQuantityValid(quantity: number) {
+    return (
+      quantity >= QUANTITY_THRESHOLD_MIN && quantity <= QUANTITY_THRESHOLD_MAX
+    )
+  }
 
-        return (
-          <div key={product.id}>
-            <OrderItemsItem>
-              <ItemLeftContainer>
-                <img src={product.image} alt={product.title} />
-              </ItemLeftContainer>
-              <ItemCentralContainer>
-                <p>{product.title}</p>
-                <QuantityInput
-                  itemId={product.id}
-                  quantity={product.quantity}
-                  disableDecrementButton={
-                    product.quantity === QUANTITY_THRESHOLD_MIN
-                  }
-                  disableIncrementButton={
-                    product.quantity >= QUANTITY_THRESHOLD_MAX
-                  }
-                  onChange={handleQuantityChange}
-                  onIncrement={handleQuantityIncrement.bind(null, product)}
-                  onDecrement={handleQuantityDecrement.bind(null, product)}
-                />
-                <button
-                  type="button"
-                  onClick={handleRemoveButtonClick.bind(null, product)}
-                >
-                  <Trash size={16} color={theme['purple-500']} />
-                  Remove
-                </button>
-              </ItemCentralContainer>
-              <ItemRightContainer>{formattedTotalPrice}</ItemRightContainer>
-            </OrderItemsItem>
-            <Divider />
-          </div>
-        )
-      })}
-    </OrderItemsList>
+  return (
+    <>
+      <Toast
+        ref={quantityValidationToastRef}
+        title="Invalid Quantity"
+        description={`Quantity must be between ${QUANTITY_THRESHOLD_MIN} and ${QUANTITY_THRESHOLD_MAX}.`}
+        type="foreground"
+      />
+
+      <OrderItemsList>
+        {basketItems.map((product) => {
+          const totalPrice = product.price * product.quantity
+          const formattedTotalPrice = priceFormatter.format(totalPrice)
+
+          return (
+            <div key={product.id}>
+              <OrderItemsItem>
+                <ItemLeftContainer>
+                  <img src={product.image} alt={product.title} />
+                </ItemLeftContainer>
+                <ItemCentralContainer>
+                  <p>{product.title}</p>
+                  <QuantityInput
+                    itemId={product.id}
+                    quantity={product.quantity}
+                    disableDecrementButton={
+                      product.quantity === QUANTITY_THRESHOLD_MIN
+                    }
+                    disableIncrementButton={
+                      product.quantity >= QUANTITY_THRESHOLD_MAX
+                    }
+                    onChange={handleQuantityChange}
+                    onIncrement={handleQuantityIncrement.bind(null, product)}
+                    onDecrement={handleQuantityDecrement.bind(null, product)}
+                  />
+                  <button
+                    type="button"
+                    onClick={handleRemoveButtonClick.bind(null, product)}
+                  >
+                    <Trash size={16} color={theme['purple-500']} />
+                    Remove
+                  </button>
+                </ItemCentralContainer>
+                <ItemRightContainer>{formattedTotalPrice}</ItemRightContainer>
+              </OrderItemsItem>
+              <Divider />
+            </div>
+          )
+        })}
+      </OrderItemsList>
+    </>
   )
 }
