@@ -14,18 +14,19 @@ export const QuantityInputContainer = styled.div`
     align-items: center;
     justify-content: center;
     border: 0;
+    color: ${({ theme }) => theme['purple-500']};
     background-color: transparent;
     cursor: pointer;
+    transition: color ${({ theme }) => theme['transition-duration']},
+      opacity ${({ theme }) => theme['transition-duration']};
 
-    svg {
-      color: ${({ theme }) => theme['purple-500']};
-      transition: color ${({ theme }) => theme['transition-duration']};
+    &:disabled {
+      color: ${({ theme }) => theme['base-600']};
+      opacity: 0.5;
     }
 
-    &:hover {
-      svg {
-        color: ${({ theme }) => theme['purple-700']};
-      }
+    &:not(:disabled):hover {
+      color: ${({ theme }) => theme['purple-700']};
     }
   }
 `

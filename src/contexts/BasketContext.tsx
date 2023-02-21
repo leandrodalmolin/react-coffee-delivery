@@ -11,6 +11,8 @@ import {
  */
 const LOCAL_STORAGE_TAG = '@coffee-delivery:basket-state-1.0.0'
 const DELIVERY_COST = 3.5
+export const QUANTITY_THRESHOLD_MIN = 1
+export const QUANTITY_THRESHOLD_MAX = 99
 
 interface BasketContextType {
   items: BasketItem[]
@@ -71,7 +73,7 @@ export function BasketContextProvider({
     dispatchBasketAction({ type: ActionTypes.CLEAR_BASKET })
   }
 
-  function findBasketItemById(id: string) {
+  function findBasketItemById(id: string): BasketItem {
     return basketState.items.find((item) => item.id === id)
   }
 

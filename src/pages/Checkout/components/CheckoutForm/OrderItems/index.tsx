@@ -10,7 +10,11 @@ import {
   OrderItemsList,
 } from './styles'
 import { ChangeEvent, useContext } from 'react'
-import { BasketContext } from '../../../../../contexts/BasketContext'
+import {
+  BasketContext,
+  QUANTITY_THRESHOLD_MAX,
+  QUANTITY_THRESHOLD_MIN,
+} from '../../../../../contexts/BasketContext'
 import { QuantityInput } from '../../../../../components/QuantityInput'
 import { BasketItem } from '../../../../../reducers/basket'
 
@@ -24,14 +28,14 @@ export function OrderItems() {
 
   function handleQuantityIncrement(item: BasketItem) {
     const newQuantity = item.quantity + 1
-    if (newQuantity < 100) {
+    if (newQuantity <= QUANTITY_THRESHOLD_MAX) {
       updateBasketItem({ ...item, quantity: newQuantity })
     }
   }
 
   function handleQuantityDecrement(item: BasketItem) {
     const newQuantity = item.quantity - 1
-    if (newQuantity > 0) {
+    if (newQuantity >= QUANTITY_THRESHOLD_MIN) {
       updateBasketItem({ ...item, quantity: newQuantity })
     }
   }
@@ -42,11 +46,11 @@ export function OrderItems() {
     if (!item) return
 
     const newQuantity = Number(event.target.value)
-    if (newQuantity > 99) {
+    if (newQuantity > QUANTITY_THRESHOLD_MAX) {
       return
     }
 
-    if (newQuantity > 0) {
+    if (newQuantity > QUANTITY_THRESHOLD_MIN) {
       updateBasketItem({ ...item, quantity: newQuantity })
     }
   }
@@ -72,6 +76,12 @@ export function OrderItems() {
                 <QuantityInput
                   itemId={product.id}
                   quantity={product.quantity}
+                  disableDecrementButton={
+                    product.quantity === QUANTITY_THRESHOLD_MIN
+                  }
+                  disableIncrementButton={
+                    product.quantity >= QUANTITY_THRESHOLD_MAX
+                  }
                   onChange={handleQuantityChange}
                   onIncrement={handleQuantityIncrement.bind(null, product)}
                   onDecrement={handleQuantityDecrement.bind(null, product)}
