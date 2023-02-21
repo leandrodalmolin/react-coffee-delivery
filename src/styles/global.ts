@@ -7,7 +7,12 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  :focus {
+  /**
+   * Using "focus-visible" instead of "focus"
+   * because it does not apply focus styles on a mouse click
+   * For more: https://trungk18.com/experience/focus-and-focus-visible/
+   */ 
+  :focus-visible {
     // Default: will be removed in Forced Color Modes
     box-shadow: 0 0 0 1px ${(props) => props.theme['yellow-700']};
     // Fallback: will be visible with custom system colors in Forced Color Modes
