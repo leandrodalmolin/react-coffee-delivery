@@ -5,7 +5,7 @@ import { breakpoint } from '../../../../styles/breakpoints'
 export const HeroContainer = styled.div`
   display: flex;
   align-items: center;
-  padding: 1rem 0;
+  padding: 1rem 0 3rem;
   background-image: url(${heroBg});
   background-size: contain;
   background-position: center 85%;
@@ -17,7 +17,7 @@ export const HeroContainer = styled.div`
   }
 
   @media ${breakpoint.md} {
-    padding: 2.5rem 0;
+    padding: 2.5rem 0 4rem;
   }
 
   @media ${breakpoint.lg} {
