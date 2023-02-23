@@ -16,7 +16,7 @@ import {
   QUANTITY_THRESHOLD_MIN,
 } from '../../../../../contexts/BasketContext'
 import { QuantityInput } from '../../../../../components/QuantityInput'
-import { BasketItem } from '../../../../../reducers/basket'
+import { IBasketItem } from '../../../../../reducers/basket'
 import { Toast, ToastRefType } from '../../../../../components/Toast'
 
 export function OrderItems() {
@@ -29,14 +29,14 @@ export function OrderItems() {
 
   const quantityValidationToastRef = useRef<ToastRefType>(null)
 
-  function handleQuantityIncrement(item: BasketItem) {
+  function handleQuantityIncrement(item: IBasketItem) {
     const newQuantity = item.quantity + 1
     if (newQuantity <= QUANTITY_THRESHOLD_MAX) {
       updateBasketItem({ ...item, quantity: newQuantity })
     }
   }
 
-  function handleQuantityDecrement(item: BasketItem) {
+  function handleQuantityDecrement(item: IBasketItem) {
     const newQuantity = item.quantity - 1
     if (newQuantity >= QUANTITY_THRESHOLD_MIN) {
       updateBasketItem({ ...item, quantity: newQuantity })
@@ -59,7 +59,7 @@ export function OrderItems() {
     quantityValidationToastRef.current?.notify()
   }
 
-  function handleRemoveButtonClick(item: BasketItem) {
+  function handleRemoveButtonClick(item: IBasketItem) {
     removeBasketItem(item)
   }
 
