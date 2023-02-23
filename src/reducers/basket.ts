@@ -6,7 +6,7 @@ export enum ActionTypes {
   CLEAR_BASKET = 'CLEAR_BASKET',
 }
 
-export interface BasketItem {
+export interface IBasketItem {
   id: string
   title: string
   price: number
@@ -14,15 +14,15 @@ export interface BasketItem {
   image: string
 }
 
-export interface BasketState {
-  items: BasketItem[]
+export interface IBasketState {
+  items: IBasketItem[]
 }
 
 export const defaultBasketState = {
-  items: <BasketItem[]>[],
+  items: <IBasketItem[]>[],
 }
 
-export function basketReducer(state: BasketState, action: any) {
+export function basketReducer(state: IBasketState, action: any) {
   /**
    * Add item
    */

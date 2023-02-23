@@ -4,14 +4,14 @@ export type CardVariant = 'flat' | 'coloured-border'
 export type CardBorderRadius = 'even' | 'uneven'
 export type CardPadding = 'narrow' | 'medium'
 
-interface CardContainerProps {
+interface ICardContainerProps {
   variant: CardVariant
   borderRadius: CardBorderRadius
   padding: CardPadding
   alignCenter: Boolean
 }
 
-export const CardContainer = styled.div<CardContainerProps>`
+export const CardContainer = styled.div<ICardContainerProps>`
   position: relative;
   display: flex;
   justify-content: space-between;

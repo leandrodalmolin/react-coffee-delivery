@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
-interface RoundedIconContainerProps {
+interface IRoundedIconContainerProps {
   background?: string
 }
 
-export const RoundedIconContainer = styled.div<RoundedIconContainerProps>`
+export const RoundedIconContainer = styled.div<IRoundedIconContainerProps>`
   display: flex;
   align-items: center;
   justify-content: center;

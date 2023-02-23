@@ -20,7 +20,7 @@ export type TagType =
   | 'Alcoholic'
   | 'Special'
 
-export interface ProductType {
+export interface IProduct {
   id: string
   title: string
   description: string
@@ -29,7 +29,7 @@ export interface ProductType {
   image: string
 }
 
-export const productsData: ProductType[] = [
+export const productsData: IProduct[] = [
   {
     id: 'p1',
     title: 'Traditional Espresso',

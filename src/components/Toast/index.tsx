@@ -8,7 +8,7 @@ export type ToastRefType = {
   notify: () => void
 }
 
-interface ToastProps extends ToastPrimitive.ToastProps {
+interface IToastProps extends ToastPrimitive.ToastProps {
   title: string
   description: string
   actionAltText?: string
@@ -16,7 +16,7 @@ interface ToastProps extends ToastPrimitive.ToastProps {
 }
 
 // eslint-disable-next-line react/display-name
-export const Toast = forwardRef<ToastRefType, ToastProps>(
+export const Toast = forwardRef<ToastRefType, IToastProps>(
   (props, forwardedRef) => {
     const { title, description, actionAltText = '', children, ...rest } = props
     const [open, setOpen] = useState(false)

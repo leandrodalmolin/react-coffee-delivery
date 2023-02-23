@@ -45,11 +45,11 @@ export const DeliveryAddressContainer = styled.div`
   }
 `
 
-interface FormControlProps {
+interface IFormControlProps {
   optional?: Boolean
 }
 
-export const FormControl = styled.div<FormControlProps>`
+export const FormControl = styled.div<IFormControlProps>`
   ${({ theme, optional }) => {
     if (optional) {
       const containerWidth = '4.5rem'

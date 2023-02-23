@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { CardHeadingContainer } from './styles'
 
-interface CardHeadingProps {
+interface ICardHeadingProps {
   heading: string
   subheading: string
   children?: ReactNode
@@ -10,7 +10,7 @@ export function CardHeading({
   heading,
   subheading,
   children,
-}: CardHeadingProps) {
+}: ICardHeadingProps) {
   return (
     <CardHeadingContainer>
       {children}

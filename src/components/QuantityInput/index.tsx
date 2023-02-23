@@ -2,7 +2,7 @@ import { Minus, Plus } from 'phosphor-react'
 import { ChangeEvent } from 'react'
 import { InputNumber, QuantityInputContainer } from './styles'
 
-interface QuantityInputProps {
+interface IQuantityInputProps {
   itemId?: string
   quantity: number
   disableDecrementButton?: boolean
@@ -20,7 +20,7 @@ export function QuantityInput({
   onChange,
   disableDecrementButton = false,
   disableIncrementButton = false,
-}: QuantityInputProps) {
+}: IQuantityInputProps) {
   return (
     <>
       <QuantityInputContainer>

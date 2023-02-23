@@ -11,11 +11,11 @@ import {
   QUANTITY_THRESHOLD_MAX,
   QUANTITY_THRESHOLD_MIN,
 } from '../../../../../../contexts/BasketContext'
-import { ProductType } from '../../../../../../data'
-import { BasketItem } from '../../../../../../reducers/basket'
+import { IProduct } from '../../../../../../data'
+import { IBasketItem } from '../../../../../../reducers/basket'
 import { BasketFormContainer } from './style'
 
-const basketFormSchema: ZodSchema<BasketItem> = z.object({
+const basketFormSchema: ZodSchema<IBasketItem> = z.object({
   id: z.string(),
   title: z.string(),
   price: z.number(),
@@ -25,11 +25,11 @@ const basketFormSchema: ZodSchema<BasketItem> = z.object({
 
 type CheckoutFormInputs = z.infer<typeof basketFormSchema>
 
-interface BasketFormProps {
-  product: ProductType
+interface IBasketFormProps {
+  product: IProduct
 }
 
-export function BasketForm({ product }: BasketFormProps) {
+export function BasketForm({ product }: IBasketFormProps) {
   const basketUpdateToastRef = useRef<ToastRefType>(null)
   const quantityUpdateToastRef = useRef<ToastRefType>(null)
   const basketItemLimitToastRef = useRef<ToastRefType>(null)

@@ -6,7 +6,7 @@ import {
   CardVariant,
 } from './styles'
 
-interface CardProps {
+interface ICardProps {
   variant?: CardVariant
   borderRadius?: CardBorderRadius
   padding?: CardPadding
@@ -21,7 +21,7 @@ export function Card({
   alignCenter = false,
   children,
   ...rest
-}: CardProps) {
+}: ICardProps) {
   return (
     <CardContainer
       variant={variant}

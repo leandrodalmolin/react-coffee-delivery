@@ -2,10 +2,10 @@ import { TagsList } from './TagsList'
 import { HeadingMD } from '../../../../../styles/typography'
 import { PriceTag } from './PriceTag'
 import { ProductContainer } from './styles'
-import { ProductType } from '../../../../../data'
+import { IProduct } from '../../../../../data'
 import { BasketForm } from './BasketForm'
 
-export function Product(product: ProductType) {
+export function Product(product: IProduct) {
   const { title, description, image, tags, price } = product
 
   return (

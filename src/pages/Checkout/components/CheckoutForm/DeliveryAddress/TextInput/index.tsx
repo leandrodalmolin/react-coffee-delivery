@@ -1,12 +1,12 @@
 import { useFormContext } from 'react-hook-form'
 import { ErrorMessage } from '../../styles'
 
-interface TextInputProps {
+interface ITextInputProps {
   field: string
   label: string
 }
 
-export function TextInput({ field, label }: TextInputProps) {
+export function TextInput({ field, label }: ITextInputProps) {
   const {
     register,
     formState: { errors },

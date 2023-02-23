@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useEffect, useMemo, useReducer } from 'react'
 import {
   ActionTypes,
-  BasketItem,
+  IBasketItem,
   basketReducer,
   defaultBasketState,
 } from '../reducers/basket'
@@ -20,25 +20,25 @@ type TotalsType = {
   itemsQuantity: number
 }
 
-interface BasketContextType {
-  items: BasketItem[]
+interface IBasketContext {
+  items: IBasketItem[]
   totals: TotalsType
-  addBasketItem: (item: BasketItem) => void
-  removeBasketItem: (item: BasketItem) => void
-  updateBasketItem: (item: BasketItem) => void
-  findBasketItemById: (id: string) => BasketItem
+  addBasketItem: (item: IBasketItem) => void
+  removeBasketItem: (item: IBasketItem) => void
+  updateBasketItem: (item: IBasketItem) => void
+  findBasketItemById: (id: string) => IBasketItem
   clearBasket: () => void
 }
 
-export const BasketContext = createContext({} as BasketContextType)
+export const BasketContext = createContext({} as IBasketContext)
 
-interface BasketContextProviderProps {
+interface IBasketContextProviderProps {
   children: ReactNode
 }
 
 export function BasketContextProvider({
   children,
-}: BasketContextProviderProps) {
+}: IBasketContextProviderProps) {
   const [basketState, dispatchBasketAction] = useReducer(
     basketReducer,
     defaultBasketState,
@@ -59,15 +59,15 @@ export function BasketContextProvider({
     localStorage.setItem(LOCAL_STORAGE_TAG, stateJSON)
   }, [basketState])
 
-  function addBasketItem(item: BasketItem) {
+  function addBasketItem(item: IBasketItem) {
     dispatchBasketAction({ type: ActionTypes.ADD_ITEM, item })
   }
 
-  function updateBasketItem(item: BasketItem) {
+  function updateBasketItem(item: IBasketItem) {
     dispatchBasketAction({ type: ActionTypes.UPDATE_ITEM, item })
   }
 
-  function removeBasketItem(item: BasketItem) {
+  function removeBasketItem(item: IBasketItem) {
     dispatchBasketAction({ type: ActionTypes.REMOVE_ITEM, item })
   }
 
@@ -75,7 +75,7 @@ export function BasketContextProvider({
     dispatchBasketAction({ type: ActionTypes.CLEAR_BASKET })
   }
 
-  function findBasketItemById(id: string): BasketItem {
+  function findBasketItemById(id: string): IBasketItem {
     return basketState.items.find((item) => item.id === id)
   }
 

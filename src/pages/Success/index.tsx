@@ -9,13 +9,13 @@ import { CheckoutFormInputs } from '../Checkout/components/CheckoutForm'
 import { paymentLabels } from '../Checkout/components/CheckoutForm/PaymentOptions'
 import { Wrapper } from '../../components/Wrapper'
 
-interface SuccessPageState {
+interface ISuccessPageState {
   state: CheckoutFormInputs
 }
 
 export function Success() {
   const theme = useTheme()
-  const { state } = useLocation() as SuccessPageState
+  const { state } = useLocation() as ISuccessPageState
 
   // Only allow access when traffic is coming from Checkout page
   if (!state) {
