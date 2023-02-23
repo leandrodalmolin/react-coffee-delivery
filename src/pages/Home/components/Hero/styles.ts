@@ -7,8 +7,9 @@ export const HeroContainer = styled.div`
   align-items: center;
   padding: 1rem 0;
   background-image: url(${heroBg});
-  background-size: cover;
-  background-position: center;
+  background-size: contain;
+  background-position: center 85%;
+  background-repeat: no-repeat;
   overflow: hidden;
 
   img {
@@ -20,6 +21,7 @@ export const HeroContainer = styled.div`
   }
 
   @media ${breakpoint.lg} {
+    background-position: center;
     min-height: 544px; // set image height to prevent gradient being cropped
   }
 `
