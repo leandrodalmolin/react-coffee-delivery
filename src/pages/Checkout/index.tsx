@@ -1,5 +1,5 @@
+import { Wrapper } from '../../components/Wrapper'
 import { CheckoutForm } from './components/CheckoutForm'
-import { Wrapper } from '../../layouts/DefaultLayout/styles'
 
 export function Checkout() {
   return (

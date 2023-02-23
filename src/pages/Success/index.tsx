@@ -1,5 +1,4 @@
 import { Card } from '../../components/Card'
-import { Wrapper } from '../../layouts/DefaultLayout/styles'
 import { SuccessContainer, SuccessMessage, SummaryList } from './styles'
 import DeliverySvg from '../../assets/delivery-illustration.svg'
 import { RoundedIcon } from '../../components/RoundedIcon'
@@ -8,6 +7,7 @@ import { useTheme } from 'styled-components'
 import { useLocation, Navigate } from 'react-router-dom'
 import { CheckoutFormInputs } from '../Checkout/components/CheckoutForm'
 import { paymentLabels } from '../Checkout/components/CheckoutForm/PaymentOptions'
+import { Wrapper } from '../../components/Wrapper'
 
 interface SuccessPageState {
   state: CheckoutFormInputs
