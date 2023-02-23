@@ -8,8 +8,6 @@ import { useTheme } from 'styled-components'
 import { useLocation, Navigate } from 'react-router-dom'
 import { CheckoutFormInputs } from '../Checkout/components/CheckoutForm'
 import { paymentLabels } from '../Checkout/components/CheckoutForm/PaymentOptions'
-import { useContext, useEffect } from 'react'
-import { BasketContext } from '../../contexts/BasketContext'
 
 interface SuccessPageState {
   state: CheckoutFormInputs
@@ -17,12 +15,7 @@ interface SuccessPageState {
 
 export function Success() {
   const theme = useTheme()
-  const { clearBasket } = useContext(BasketContext)
   const { state } = useLocation() as SuccessPageState
-
-  useEffect(() => {
-    clearBasket()
-  }, [clearBasket])
 
   // Only allow access when traffic is coming from Checkout page
   if (!state) {
@@ -32,8 +25,8 @@ export function Success() {
   return (
     <Wrapper>
       <SuccessMessage>
-        <h2>Woohoo! Confirmed order</h2>
-        <p>Now just wait for the coffee to come to you soon</p>
+        <h2>Woohoo, order confirmed!</h2>
+        <p>Thank you for your purchase, your order is on the way.</p>
       </SuccessMessage>
       <SuccessContainer>
         <main>

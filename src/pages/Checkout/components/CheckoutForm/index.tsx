@@ -37,7 +37,7 @@ export type CheckoutFormInputs = z.infer<typeof checkoutFormSchema>
 export function CheckoutForm() {
   const theme = useTheme()
   const navigate = useNavigate()
-  const { items: basketItems } = useContext(BasketContext)
+  const { items: basketItems, clearBasket } = useContext(BasketContext)
 
   const formMethods = useForm<CheckoutFormInputs>({
     resolver: zodResolver(checkoutFormSchema),
@@ -53,9 +53,21 @@ export function CheckoutForm() {
     formState: { isSubmitting },
   } = formMethods
 
+  /**
+   * This code is only executed if form is valid
+   */
   const onFormSubmit: SubmitHandler<CheckoutFormInputs> = (formData) => {
+    // At the moment, products aren't needed at the success page.
+    // This is only an example how it could be forwarded.
+    const formDataWithBasketItems = {
+      ...formData,
+      products: { ...basketItems },
+    }
+
+    clearBasket()
+
     navigate('/success', {
-      state: formData,
+      state: formDataWithBasketItems,
     })
   }
 
