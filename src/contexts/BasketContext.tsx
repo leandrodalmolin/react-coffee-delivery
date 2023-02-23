@@ -10,14 +10,19 @@ import {
  * Constants
  */
 const LOCAL_STORAGE_TAG = '@coffee-delivery:basket-state-1.0.0'
-const DELIVERY_COST = 3.5
+export const DELIVERY_COST = 3.5
 export const QUANTITY_THRESHOLD_MIN = 1
 export const QUANTITY_THRESHOLD_MAX = 99
 
+type TotalsType = {
+  orderAmount: number
+  itemsAmount: number
+  itemsQuantity: number
+}
+
 interface BasketContextType {
   items: BasketItem[]
-  deliveryCost: number
-  totalAmount: number
+  totals: TotalsType
   addBasketItem: (item: BasketItem) => void
   removeBasketItem: (item: BasketItem) => void
   updateBasketItem: (item: BasketItem) => void
@@ -54,9 +59,6 @@ export function BasketContextProvider({
     localStorage.setItem(LOCAL_STORAGE_TAG, stateJSON)
   }, [basketState])
 
-  // Hardcoded delivery for now
-  const deliveryCost = DELIVERY_COST
-
   function addBasketItem(item: BasketItem) {
     dispatchBasketAction({ type: ActionTypes.ADD_ITEM, item })
   }
@@ -79,10 +81,24 @@ export function BasketContextProvider({
 
   // Watch for changes and it doesn't recalculate
   // the total amount in case screen get rerendered
-  const totalAmount = useMemo(() => {
+  const totals = useMemo(() => {
     return basketState.items.reduce(
-      (acc, item) => item.price * item.quantity + acc,
-      0,
+      (acc, item) => {
+        const currentItemsQuantity = item.quantity + acc.itemsQuantity
+        const currentItemsAmount = item.price * item.quantity + acc.itemsAmount
+        const currentOrderAmount = currentItemsAmount + DELIVERY_COST
+
+        return {
+          orderAmount: currentOrderAmount,
+          itemsAmount: currentItemsAmount,
+          itemsQuantity: currentItemsQuantity,
+        }
+      },
+      {
+        orderAmount: 0,
+        itemsAmount: 0,
+        itemsQuantity: 0,
+      } as TotalsType,
     )
   }, [basketState.items])
 
@@ -90,8 +106,7 @@ export function BasketContextProvider({
     <BasketContext.Provider
       value={{
         items: basketState.items,
-        deliveryCost,
-        totalAmount,
+        totals,
         addBasketItem,
         updateBasketItem,
         removeBasketItem,

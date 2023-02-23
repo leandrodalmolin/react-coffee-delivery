@@ -8,8 +8,7 @@ import { Location } from './Location'
 import { HeaderActions, HeaderContainer } from './styles'
 
 export function Header() {
-  const { items: basketItems } = useContext(BasketContext)
-  const numberOfBasketItems = basketItems.length
+  const { totals } = useContext(BasketContext)
 
   return (
     <Wrapper>
@@ -21,7 +20,7 @@ export function Header() {
           <Location />
           <Link to="/checkout">
             <ShoppingCartSimple size={22} weight="fill" />
-            {numberOfBasketItems > 0 && <span>{numberOfBasketItems}</span>}
+            {totals.itemsQuantity > 0 && <span>{totals.itemsQuantity}</span>}
           </Link>
         </HeaderActions>
       </HeaderContainer>
