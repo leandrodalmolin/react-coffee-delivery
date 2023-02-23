@@ -1,17 +1,17 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ShoppingCartSimple } from 'phosphor-react'
-import { useContext, useRef } from 'react'
+import { useContext } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { z, ZodSchema } from 'zod'
 import { QuantityInput } from '../../../../../../components/QuantityInput'
-import { Toast, ToastRefType } from '../../../../../../components/Toast'
 import {
   BasketContext,
   QUANTITY_THRESHOLD_MAX,
   QUANTITY_THRESHOLD_MIN,
 } from '../../../../../../contexts/BasketContext'
 import { IProduct } from '../../../../../../data'
+import { useToast } from '../../../../../../hooks/useToast'
 import { IBasketItem } from '../../../../../../reducers/basket'
 import { BasketFormContainer } from './style'
 
@@ -30,9 +30,7 @@ interface IBasketFormProps {
 }
 
 export function BasketForm({ product }: IBasketFormProps) {
-  const basketUpdateToastRef = useRef<ToastRefType>(null)
-  const quantityUpdateToastRef = useRef<ToastRefType>(null)
-  const basketItemLimitToastRef = useRef<ToastRefType>(null)
+  const toast = useToast()
 
   const { addBasketItem, updateBasketItem, findBasketItemById } =
     useContext(BasketContext)
@@ -57,7 +55,13 @@ export function BasketForm({ product }: IBasketFormProps) {
       const newQuantity = item.quantity + submittedItem.quantity
 
       if (newQuantity > QUANTITY_THRESHOLD_MAX) {
-        basketItemLimitToastRef.current?.notify()
+        const remainingQuantity = QUANTITY_THRESHOLD_MAX - item.quantity
+
+        toast({
+          title: 'Quantity Limit',
+          description: `You can only add ${remainingQuantity} more of this product to the basket.`,
+          type: 'foreground',
+        })
         return
       }
 
@@ -69,7 +73,14 @@ export function BasketForm({ product }: IBasketFormProps) {
       addBasketItem({ ...submittedItem })
     }
 
-    basketUpdateToastRef.current?.notify()
+    toast({
+      title: 'Basket Updated',
+      description: `${product.title} has been added to your basket.`,
+      actionComponent: <Link to="/checkout">View basket</Link>,
+      actionAltText: 'View Basket',
+      type: 'foreground',
+    })
+
     reset()
   }
 
@@ -80,7 +91,11 @@ export function BasketForm({ product }: IBasketFormProps) {
     })
 
     if (!success) {
-      quantityUpdateToastRef.current?.notify()
+      toast({
+        title: 'Invalid Quantity',
+        description: `Quantity must be between ${QUANTITY_THRESHOLD_MIN} and ${QUANTITY_THRESHOLD_MAX}.`,
+        type: 'foreground',
+      })
     }
 
     return success
@@ -88,30 +103,6 @@ export function BasketForm({ product }: IBasketFormProps) {
 
   return (
     <>
-      <Toast
-        ref={basketUpdateToastRef}
-        title="Basket Updated"
-        description={`${product.title} has been added to your basket.`}
-        actionAltText="View basket"
-        type="foreground"
-      >
-        <Link to="/checkout">View basket</Link>
-      </Toast>
-
-      <Toast
-        ref={quantityUpdateToastRef}
-        title="Invalid Quantity"
-        description={`Quantity must be between ${QUANTITY_THRESHOLD_MIN} and ${QUANTITY_THRESHOLD_MAX}.`}
-        type="foreground"
-      />
-
-      <Toast
-        ref={basketItemLimitToastRef}
-        title="Basket Item Limit"
-        description={`You can only add ${QUANTITY_THRESHOLD_MAX} items of this product to your basket.`}
-        type="foreground"
-      />
-
       <BasketFormContainer onSubmit={handleSubmit(onFormSubmit)}>
         <input type="hidden" {...register('id')} />
         <input type="hidden" {...register('title')} />

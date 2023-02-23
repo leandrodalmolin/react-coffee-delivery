@@ -9,7 +9,7 @@ import {
   OrderItemsItem,
   OrderItemsList,
 } from './styles'
-import { ChangeEvent, useContext, useRef } from 'react'
+import { ChangeEvent, useContext } from 'react'
 import {
   BasketContext,
   QUANTITY_THRESHOLD_MAX,
@@ -17,17 +17,16 @@ import {
 } from '../../../../../contexts/BasketContext'
 import { QuantityInput } from '../../../../../components/QuantityInput'
 import { IBasketItem } from '../../../../../reducers/basket'
-import { Toast, ToastRefType } from '../../../../../components/Toast'
+import { useToast } from '../../../../../hooks/useToast'
 
 export function OrderItems() {
+  const toast = useToast()
   const theme = useTheme()
   const {
     items: basketItems,
     updateBasketItem,
     removeBasketItem,
   } = useContext(BasketContext)
-
-  const quantityValidationToastRef = useRef<ToastRefType>(null)
 
   function handleQuantityIncrement(item: IBasketItem) {
     const newQuantity = item.quantity + 1
@@ -56,7 +55,11 @@ export function OrderItems() {
     }
 
     // Notify invalid quantity
-    quantityValidationToastRef.current?.notify()
+    toast({
+      title: 'Invalid Quantity',
+      description: `Quantity must be between ${QUANTITY_THRESHOLD_MIN} and ${QUANTITY_THRESHOLD_MAX}.`,
+      type: 'foreground',
+    })
   }
 
   function handleRemoveButtonClick(item: IBasketItem) {
@@ -71,13 +74,6 @@ export function OrderItems() {
 
   return (
     <>
-      <Toast
-        ref={quantityValidationToastRef}
-        title="Invalid Quantity"
-        description={`Quantity must be between ${QUANTITY_THRESHOLD_MIN} and ${QUANTITY_THRESHOLD_MAX}.`}
-        type="foreground"
-      />
-
       <OrderItemsList>
         {basketItems.map((product) => {
           const totalPrice = product.price * product.quantity

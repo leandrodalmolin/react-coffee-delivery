@@ -5,15 +5,19 @@ import { Router } from './Router'
 import { GlobalStyle } from './styles/global'
 import { defaultTheme } from './styles/themes/default'
 import { BasketContextProvider } from './contexts/BasketContext'
+import { ToastContextProvider } from './contexts/ToastContext'
 
 function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
         <BasketContextProvider>
-          <Router />
+          <ToastContextProvider>
+            <Router />
+          </ToastContextProvider>
         </BasketContextProvider>
       </BrowserRouter>
+
       <GlobalStyle />
     </ThemeProvider>
   )

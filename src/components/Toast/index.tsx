@@ -1,47 +1,51 @@
 import * as ToastPrimitive from '@radix-ui/react-toast'
 import { X } from 'phosphor-react'
-import { forwardRef, ReactNode, useImperativeHandle, useState } from 'react'
+import { ReactNode } from 'react'
 import { HeadingSm } from '../../styles/typography'
-import { ToastAction, ToastClose, ToastRoot, ToastTitle } from './styles'
+import {
+  ToastAction,
+  ToastClose,
+  ToastRoot,
+  ToastTitle,
+  ToastViewport,
+} from './styles'
 
-export type ToastRefType = {
-  notify: () => void
-}
+export const RadixToastProvider = ToastPrimitive.Provider
+export const RadixToastViewport = ToastViewport
 
-interface IToastProps extends ToastPrimitive.ToastProps {
+export interface IToastProps extends ToastPrimitive.ToastProps {
   title: string
   description: string
+  actionComponent?: ReactNode | undefined
   actionAltText?: string
-  children?: ReactNode
 }
 
-// eslint-disable-next-line react/display-name
-export const Toast = forwardRef<ToastRefType, IToastProps>(
-  (props, forwardedRef) => {
-    const { title, description, actionAltText = '', children, ...rest } = props
-    const [open, setOpen] = useState(false)
+export function Toast({
+  title,
+  description,
+  actionComponent = undefined,
+  actionAltText = 'Action',
+  ...rest
+}: IToastProps) {
+  return (
+    <ToastRoot {...rest}>
+      <ToastClose asChild>
+        <span aria-hidden>
+          <X weight="bold" size={22} />
+        </span>
+      </ToastClose>
 
-    useImperativeHandle(forwardedRef, () => ({
-      notify: () => setOpen(true),
-    }))
+      <ToastTitle asChild>
+        <HeadingSm>{title}</HeadingSm>
+      </ToastTitle>
 
-    return (
-      <ToastRoot open={open} onOpenChange={setOpen} {...rest}>
-        <ToastTitle asChild>
-          <HeadingSm>{title}</HeadingSm>
-        </ToastTitle>
-        <ToastPrimitive.Description>{description}</ToastPrimitive.Description>
-        {children && (
-          <ToastAction asChild altText={actionAltText}>
-            {children}
-          </ToastAction>
-        )}
-        <ToastClose aria-label="Close">
-          <span aria-hidden>
-            <X weight="bold" size={22} />
-          </span>
-        </ToastClose>
-      </ToastRoot>
-    )
-  },
-)
+      <ToastPrimitive.Description>{description}</ToastPrimitive.Description>
+
+      {actionComponent && (
+        <ToastAction asChild altText={actionAltText}>
+          {actionComponent}
+        </ToastAction>
+      )}
+    </ToastRoot>
+  )
+}
