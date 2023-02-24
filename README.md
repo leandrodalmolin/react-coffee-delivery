@@ -18,6 +18,11 @@ Application to manage a shopping basket of a fictional coffee shop, which contai
 - Form for the user to fill in their address
 - Display in the Header the number of items in the basket
 - Display the total number of items in the basket multiplied by the amount
+- Give user feedback when:
+    - an item is added to the basket
+    - invalid quantity is entered in the product form
+    - limit of a single product added to the basket has been reached
+    - form is invalid
 
 Covered concepts:
 
