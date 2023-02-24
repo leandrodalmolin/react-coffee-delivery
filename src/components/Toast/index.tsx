@@ -1,7 +1,7 @@
 import * as ToastPrimitive from '@radix-ui/react-toast'
 import { X } from 'phosphor-react'
 import { ReactNode } from 'react'
-import { HeadingSm } from '../../styles/typography'
+import { Heading } from '../Heading'
 import {
   ToastAction,
   ToastClose,
@@ -35,8 +35,8 @@ export function Toast({
         </span>
       </ToastClose>
 
-      <ToastTitle asChild>
-        <HeadingSm>{title}</HeadingSm>
+      <ToastTitle>
+        <Heading variant="h5">{title}</Heading>
       </ToastTitle>
 
       <ToastPrimitive.Description>{description}</ToastPrimitive.Description>

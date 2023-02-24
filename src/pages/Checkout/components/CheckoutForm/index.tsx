@@ -2,7 +2,6 @@ import { Coffee, CurrencyDollar, MapPinLine } from 'phosphor-react'
 import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useTheme } from 'styled-components'
-import { HeadingMD } from '../../../../styles/typography'
 import { Card } from '../../../../components/Card'
 import { CardHeading } from '../../../../components/Card/CardHeading'
 import { DeliveryAddress } from './DeliveryAddress'
@@ -18,6 +17,7 @@ import { BasketContext } from '../../../../contexts/BasketContext'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Heading } from '../../../../components/Heading'
 
 const paymentEnum = z.enum(['debit', 'credit', 'cash'], {
   required_error: 'Please select a payment method',
@@ -77,7 +77,7 @@ export function CheckoutForm() {
         <Card alignCenter>
           <EmptyBasketNotice>
             <Coffee size={50} />
-            <HeadingMD>Oops, your basket is empty!</HeadingMD>
+            <Heading variant="h4">Oops, your basket is empty!</Heading>
             <p>
               Please, <Link to="/">go back to the shop</Link> and select a few
               items.
@@ -89,7 +89,7 @@ export function CheckoutForm() {
         <FormProvider {...formMethods}>
           <CheckoutFormContainer onSubmit={handleSubmit(onFormSubmit)}>
             <section>
-              <HeadingMD>Complete your order</HeadingMD>
+              <Heading variant="h4">Complete your order</Heading>
               <Card>
                 <CardHeading
                   heading="Delivery Address"
@@ -110,7 +110,7 @@ export function CheckoutForm() {
               </Card>
             </section>
             <section>
-              <HeadingMD>Selected coffees</HeadingMD>
+              <Heading variant="h4">Selected coffees</Heading>
               <Card borderRadius="uneven">
                 <OrderItems />
                 <OrderTotals />
