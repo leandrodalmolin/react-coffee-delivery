@@ -1,13 +1,13 @@
-import * as ToggleGroup from '@radix-ui/react-toggle-group'
+import * as RadioGroup from '@radix-ui/react-radio-group'
 import styled from 'styled-components'
 
-export const ToggleRoot = styled(ToggleGroup.Root)`
+export const RadioRoot = styled(RadioGroup.Root)`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 0.75rem;
 `
 
-export const ToggleItem = styled(ToggleGroup.Item)`
+export const RadioItem = styled(RadioGroup.Item)`
   border-radius: 6px;
   border: 1px solid ${({ theme }) => theme['base-400']};
   display: flex;
@@ -27,12 +27,12 @@ export const ToggleItem = styled(ToggleGroup.Item)`
     color: ${({ theme }) => theme['purple-700']};
   }
 
-  &[data-state='on'] {
+  &[data-state='checked'] {
     border: 1px solid ${({ theme }) => theme['purple-500']};
     background-color: ${({ theme }) => theme['purple-300']};
   }
 
-  &:hover:not([data-state='on']):not([aria-invalid='true']) {
+  &:hover:not([data-state='checked']):not([aria-invalid='true']) {
     background-color: ${({ theme }) => theme['base-500']};
   }
 

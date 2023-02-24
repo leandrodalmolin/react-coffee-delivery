@@ -2,7 +2,7 @@ import { Bank, CreditCard, Money } from 'phosphor-react'
 import { Controller, useFormContext } from 'react-hook-form'
 import { CheckoutFormInputs, PaymentOptionsType } from '..'
 import { ErrorMessage } from '../styles'
-import { ToggleItem, ToggleRoot } from './styles'
+import { RadioItem, RadioRoot } from './styles'
 
 // Being used on the Success page too
 /* eslint-disable no-unused-vars */
@@ -42,22 +42,18 @@ export function PaymentOptions() {
       control={control}
       render={({ field: { onChange }, formState: { errors } }) => (
         <>
-          <ToggleRoot
-            type="single"
-            aria-label="Payment Options"
-            onValueChange={onChange}
-          >
+          <RadioRoot aria-label="Payment Options" onValueChange={onChange}>
             {options.map((option) => (
-              <ToggleItem
+              <RadioItem
                 key={option.value}
                 value={option.value}
                 aria-invalid={errors.payment ? 'true' : 'false'}
               >
                 <option.iconComponent size={16} />
                 {option.label}
-              </ToggleItem>
+              </RadioItem>
             ))}
-          </ToggleRoot>
+          </RadioRoot>
           {errors.payment && (
             <ErrorMessage role="alert">{errors.payment.message}</ErrorMessage>
           )}
