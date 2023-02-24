@@ -55,14 +55,14 @@ export const HeroSections = styled.div`
 `
 
 export const HeroHeading = styled.div`
-  margin-bottom: 2rem;
+  margin-bottom: 2.25rem;
 
   h1 {
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
     font-size: 2.5rem;
     font-family: ${({ theme }) => theme.font.cursive};
     font-weight: 800;
-    line-height: 1.2;
+    line-height: 1.1;
     color: ${({ theme }) => theme['base-900']};
   }
 

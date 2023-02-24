@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { breakpoint } from '../../styles/breakpoints'
 
 export type CardVariant = 'flat' | 'coloured-border'
 export type CardBorderRadius = 'even' | 'uneven'
@@ -24,7 +25,11 @@ export const CardContainer = styled.div<ICardContainerProps>`
 
   // Padding options
   padding: ${({ padding }) =>
-    padding === 'narrow' ? '1.25rem 1.5rem' : '2.5rem'};
+    padding === 'narrow' ? '1.25rem 1.5rem' : '2rem'};
+
+  @media ${breakpoint.sm} {
+    padding: ${({ padding }) => padding === 'medium' && '2.5rem'};
+  }
 
   // Align center option
   align-items: ${({ alignCenter }) => (alignCenter ? 'center' : 'normal')};
