@@ -79,3 +79,8 @@ npm run preview
 ```
 npm run lint
 ```
+
+### Tests
+```
+npm run test
+```
