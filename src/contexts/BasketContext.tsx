@@ -1,10 +1,15 @@
 import { createContext, ReactNode, useEffect, useMemo, useReducer } from 'react'
 import {
-  ActionTypes,
+  addBasketItemAction,
+  clearBasketAction,
+  removeBasketItemAction,
+  updateBasketItemAction,
+} from '../reducers/basket/actions'
+import {
   IBasketItem,
   basketReducer,
   defaultBasketState,
-} from '../reducers/basket'
+} from '../reducers/basket/reducer'
 
 /**
  * Constants
@@ -39,7 +44,7 @@ interface IBasketContextProviderProps {
 export function BasketContextProvider({
   children,
 }: IBasketContextProviderProps) {
-  const [basketState, dispatchBasketAction] = useReducer(
+  const [basketState, dispatch] = useReducer(
     basketReducer,
     defaultBasketState,
     // Fetch initial data from localStorage (if any)
@@ -60,19 +65,19 @@ export function BasketContextProvider({
   }, [basketState])
 
   function addBasketItem(item: IBasketItem) {
-    dispatchBasketAction({ type: ActionTypes.ADD_ITEM, item })
+    dispatch(addBasketItemAction(item))
   }
 
   function updateBasketItem(item: IBasketItem) {
-    dispatchBasketAction({ type: ActionTypes.UPDATE_ITEM, item })
+    dispatch(updateBasketItemAction(item))
   }
 
   function removeBasketItem(item: IBasketItem) {
-    dispatchBasketAction({ type: ActionTypes.REMOVE_ITEM, item })
+    dispatch(removeBasketItemAction(item))
   }
 
   function clearBasket() {
-    dispatchBasketAction({ type: ActionTypes.CLEAR_BASKET })
+    dispatch(clearBasketAction)
   }
 
   function findBasketItemById(id: string): IBasketItem {

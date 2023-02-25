@@ -16,7 +16,7 @@ import {
   QUANTITY_THRESHOLD_MIN,
 } from '../../../../../contexts/BasketContext'
 import { QuantityInput } from '../../../../../components/QuantityInput'
-import { IBasketItem } from '../../../../../reducers/basket'
+import { IBasketItem } from '../../../../../reducers/basket/reducer'
 import { useToast } from '../../../../../hooks/useToast'
 
 export function OrderItems() {

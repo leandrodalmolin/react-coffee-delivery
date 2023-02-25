@@ -12,7 +12,7 @@ import {
 } from '../../../../../../contexts/BasketContext'
 import { IProduct } from '../../../../../../data'
 import { useToast } from '../../../../../../hooks/useToast'
-import { IBasketItem } from '../../../../../../reducers/basket'
+import { IBasketItem } from '../../../../../../reducers/basket/reducer'
 import { BasketFormContainer } from './style'
 
 const basketFormSchema: ZodSchema<IBasketItem> = z.object({
