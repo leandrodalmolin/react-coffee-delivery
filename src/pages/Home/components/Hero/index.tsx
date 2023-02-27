@@ -22,7 +22,7 @@ export function Hero() {
             </HeroHeading>
             <HeroList>
               <li>
-                <RoundedIcon background={theme['yellow-700']}>
+                <RoundedIcon backgroundColor={theme['yellow-700']}>
                   <ShoppingCart weight="fill" />
                 </RoundedIcon>
                 Simple and secure purchase
@@ -34,13 +34,13 @@ export function Hero() {
                 Packaging keeps the coffee intact
               </li>
               <li>
-                <RoundedIcon background={theme['yellow-500']}>
+                <RoundedIcon backgroundColor={theme['yellow-500']}>
                   <Timer weight="fill" />
                 </RoundedIcon>
                 Fast and tracked delivery
               </li>
               <li>
-                <RoundedIcon background={theme['purple-500']}>
+                <RoundedIcon backgroundColor={theme['purple-500']}>
                   <Coffee weight="fill" />
                 </RoundedIcon>
                 Coffee arrives fresh to you

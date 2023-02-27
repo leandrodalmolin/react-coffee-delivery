@@ -29,7 +29,7 @@ export function Toast({
 }: IToastProps) {
   return (
     <ToastRoot {...rest}>
-      <ToastClose asChild>
+      <ToastClose data-testid="close-button" asChild>
         <span aria-hidden>
           <X weight="bold" size={22} />
         </span>

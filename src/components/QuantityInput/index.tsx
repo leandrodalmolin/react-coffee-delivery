@@ -26,6 +26,7 @@ export function QuantityInput({
       <QuantityInputContainer>
         <button
           type="button"
+          data-testid="decrement-btn"
           onClick={onDecrement}
           disabled={disableDecrementButton}
         >
@@ -42,6 +43,7 @@ export function QuantityInput({
 
         <button
           type="button"
+          data-testid="increment-btn"
           onClick={onIncrement}
           disabled={disableIncrementButton}
         >

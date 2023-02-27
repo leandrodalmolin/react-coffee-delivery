@@ -2,13 +2,13 @@ import { ReactNode } from 'react'
 import { RoundedIconContainer } from './styles'
 
 interface IRoundedIconProps {
-  background?: string
+  backgroundColor?: string
   children?: ReactNode
 }
 
-export function RoundedIcon({ children, background }: IRoundedIconProps) {
+export function RoundedIcon({ backgroundColor, children }: IRoundedIconProps) {
   return (
-    <RoundedIconContainer background={background}>
+    <RoundedIconContainer backgroundColor={backgroundColor}>
       {children}
     </RoundedIconContainer>
   )

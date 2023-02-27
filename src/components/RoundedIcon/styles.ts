@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 interface IRoundedIconContainerProps {
-  background?: string
+  backgroundColor?: string
 }
 
 export const RoundedIconContainer = styled.div<IRoundedIconContainerProps>`
@@ -13,8 +13,8 @@ export const RoundedIconContainer = styled.div<IRoundedIconContainerProps>`
   height: 2rem;
   padding: 0.5rem;
   color: ${({ theme }) => theme.white};
-  background-color: ${({ background, theme }) =>
-    background || theme['base-700']};
+  background-color: ${({ backgroundColor, theme }) =>
+    backgroundColor || theme['base-700']};
 
   svg {
     display: block;

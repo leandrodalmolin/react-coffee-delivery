@@ -33,7 +33,7 @@ export function Success() {
           <Card variant="coloured-border" borderRadius="uneven">
             <SummaryList>
               <li>
-                <RoundedIcon background={theme['purple-500']}>
+                <RoundedIcon backgroundColor={theme['purple-500']}>
                   <MapPin weight="fill" />
                 </RoundedIcon>
                 <p>
@@ -43,7 +43,7 @@ export function Success() {
                 </p>
               </li>
               <li>
-                <RoundedIcon background={theme['yellow-500']}>
+                <RoundedIcon backgroundColor={theme['yellow-500']}>
                   <Timer weight="fill" />
                 </RoundedIcon>
                 <p>
@@ -53,7 +53,7 @@ export function Success() {
                 </p>
               </li>
               <li>
-                <RoundedIcon background={theme['yellow-700']}>
+                <RoundedIcon backgroundColor={theme['yellow-700']}>
                   <CurrencyDollar />
                 </RoundedIcon>
                 <p>
