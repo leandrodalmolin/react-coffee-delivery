@@ -1,7 +1,8 @@
+import { TagType } from '../../../../../../data'
 import { TagsListContainer } from './styles'
 
 interface ITagsListProps {
-  tags: string[]
+  tags: TagType[]
 }
 
 export function TagsList({ tags }: ITagsListProps) {

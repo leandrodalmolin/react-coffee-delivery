@@ -25,6 +25,8 @@ describe('QuantityInput Component', () => {
    * Change
    */
   it('should call the change function when user enter new quantity', async () => {
+    const user = userEvent.setup()
+
     render(
       <QuantityInput
         quantity={1}
@@ -35,7 +37,7 @@ describe('QuantityInput Component', () => {
     )
 
     const numberInput = screen.getByRole('spinbutton')
-    await userEvent.type(numberInput, '5')
+    await user.type(numberInput, '5')
 
     expect(mockChangeQuantity).toHaveBeenCalled()
   })
@@ -44,6 +46,8 @@ describe('QuantityInput Component', () => {
    * Decrement
    */
   it('should call the decrement function on "-" button click', async () => {
+    const user = userEvent.setup()
+
     render(
       <QuantityInput
         quantity={1}
@@ -54,7 +58,7 @@ describe('QuantityInput Component', () => {
     )
 
     const button = screen.getByTestId('decrement-btn')
-    await userEvent.click(button)
+    await user.click(button)
 
     expect(mockDecrementQuantity).toHaveBeenCalled()
   })
@@ -78,6 +82,8 @@ describe('QuantityInput Component', () => {
    * Increment
    */
   it('should call the increment function on "+" button click', async () => {
+    const user = userEvent.setup()
+
     render(
       <QuantityInput
         quantity={1}
@@ -88,7 +94,7 @@ describe('QuantityInput Component', () => {
     )
 
     const button = screen.getByTestId('increment-btn')
-    await userEvent.click(button)
+    await user.click(button)
 
     expect(mockIncrementQuantity).toHaveBeenCalled()
   })

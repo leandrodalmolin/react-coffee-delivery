@@ -103,7 +103,10 @@ export function BasketForm({ product }: IBasketFormProps) {
 
   return (
     <>
-      <BasketFormContainer onSubmit={handleSubmit(onFormSubmit)}>
+      <BasketFormContainer
+        data-testid="basket-form"
+        onSubmit={handleSubmit(onFormSubmit)}
+      >
         <input type="hidden" {...register('id')} />
         <input type="hidden" {...register('title')} />
         <input type="hidden" {...register('price')} />

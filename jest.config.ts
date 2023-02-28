@@ -198,6 +198,11 @@ export default {
         },
       },
     ],
+    // Importing images is a way to include them in your browser bundle, but they are not valid JavaScript.
+    // The transformer below will replace the imported value with its filename to handle this issue.
+    // For more: https://jestjs.io/docs/code-transformation#examples
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+      '<rootDir>/test/transformer/images.ts',
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
