@@ -1,33 +1,36 @@
 import { MapPin } from 'phosphor-react'
 import { useEffect, useState } from 'react'
 import { LocationContainer } from './styles'
+import {
+  getCoords,
+  fetchAddressFromAPI,
+} from '../../../../../utils/geolocation'
 
 export function Location() {
-  const [location, setLocation] = useState('')
+  const [location, setLocation] = useState<string | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  async function fetchLocation() {
+    try {
+      const { latitude, longitude } = await getCoords()
+      const address = await fetchAddressFromAPI(latitude, longitude)
+      setLocation(`${address.city}, ${address.country_code.toUpperCase()}`)
+    } catch (error: any) {
+      setLocation('Not found')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      // Success
-      async ({ coords }) => {
-        try {
-          const response = await fetch(
-            `https://geocode.maps.co/reverse?lat=${coords.latitude}&lon=${coords.longitude}`,
-          )
-          const { address } = await response.json()
-          setLocation(`${address.city}, ${address.country_code.toUpperCase()}`)
-        } catch (error: any) {
-          setLocation('Not found')
-        }
-      },
-      // Error
-      () => setLocation('Not found'),
-    )
+    fetchLocation()
   }, [])
 
   return (
     <LocationContainer>
       <MapPin size={22} weight="fill" />
-      {location}
+      {loading && <p>Loading...</p>}
+      {!loading && location}
     </LocationContainer>
   )
 }

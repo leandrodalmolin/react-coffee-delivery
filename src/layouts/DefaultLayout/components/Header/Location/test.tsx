@@ -34,6 +34,7 @@ describe('Location Component', () => {
       success(mockedGeolocationSuccessValues),
     )
 
+    // API success
     mockFetch.mockResolvedValueOnce({
       ok: true,
       json: async () => ({
@@ -75,6 +76,7 @@ describe('Location Component', () => {
       success(mockedGeolocationSuccessValues),
     )
 
+    // API error
     mockFetch.mockRejectedValueOnce(new Error('Error'))
 
     render(<Location />)
