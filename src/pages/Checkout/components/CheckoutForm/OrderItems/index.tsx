@@ -85,6 +85,7 @@ export function OrderItems() {
                 <ItemLeftContainer>
                   <img src={product.image} alt={product.title} />
                 </ItemLeftContainer>
+
                 <ItemCentralContainer>
                   <p>{product.title}</p>
                   <QuantityInput
@@ -108,6 +109,7 @@ export function OrderItems() {
                     Remove
                   </button>
                 </ItemCentralContainer>
+
                 <ItemRightContainer>{formattedTotalPrice}</ItemRightContainer>
               </OrderItemsItem>
               <Divider />

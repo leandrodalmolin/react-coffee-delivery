@@ -25,7 +25,7 @@ type TotalsType = {
   itemsQuantity: number
 }
 
-interface IBasketContext {
+export interface IBasketContext {
   items: IBasketItem[]
   totals: TotalsType
   addBasketItem: (item: IBasketItem) => void
