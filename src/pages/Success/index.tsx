@@ -39,7 +39,7 @@ export function Success() {
                 <p>
                   Delivery at <strong>{state.street}</strong>
                   <br />
-                  {state.city}
+                  <span>{state.city}</span>
                 </p>
               </li>
               <li>
