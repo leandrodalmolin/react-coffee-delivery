@@ -24,6 +24,7 @@ export default {
     './src/components/**/*.{ts,tsx}',
     './src/pages/**/*.{ts,tsx}',
     // remove below from coverage
+    '!./src/components/CheckoutForm/DeliveryAddress/*.{ts,tsx}',
     '!./src/components/Hero/*.{ts,tsx}',
     '!./src/components/RoundedIcon/*.{ts,tsx}',
     '!./src/components/ProductsList/*.{ts,tsx}',

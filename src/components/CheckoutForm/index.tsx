@@ -99,6 +99,7 @@ export function CheckoutForm() {
                 </CardHeading>
                 <DeliveryAddress />
               </Card>
+
               <Card>
                 <CardHeading
                   heading="Payment"
@@ -109,6 +110,7 @@ export function CheckoutForm() {
                 <PaymentOptions />
               </Card>
             </section>
+
             <section>
               <Heading variant="h4">Selected coffees</Heading>
               <Card borderRadius="uneven">
