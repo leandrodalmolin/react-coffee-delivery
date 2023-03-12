@@ -1,8 +1,7 @@
 import { Bank, CreditCard, Money } from 'phosphor-react'
-import { Controller, useFormContext } from 'react-hook-form'
-import { CheckoutFormInputs, PaymentOptionsType } from '..'
+import { PaymentOptionsType } from '..'
+import { RadioGroup } from '../../RadioGroup'
 import { ErrorMessage } from '../styles'
-import { RadioItem, RadioRoot } from './styles'
 
 // Being used on the Success page too
 /* eslint-disable no-unused-vars */
@@ -13,9 +12,15 @@ export const paymentLabels = {
 } as { [key in PaymentOptionsType]: string }
 /* eslint-enable no-unused-vars */
 
-export function PaymentOptions() {
-  const { control } = useFormContext<CheckoutFormInputs>()
+interface IPaymentOptionsProps {
+  onChange: () => void
+  errorMessage?: string | null
+}
 
+export function PaymentOptions({
+  onChange,
+  errorMessage = null,
+}: IPaymentOptionsProps) {
   // For the sake of keeping the parent lean, all payment options are kept in here.
   // There is no need having them in the parent since we are using the form context.
   const options = [
@@ -23,42 +28,26 @@ export function PaymentOptions() {
       label: paymentLabels.credit,
       value: 'credit',
       iconComponent: CreditCard,
+      isInvalid: Boolean(errorMessage),
     },
     {
       label: paymentLabels.debit,
       value: 'debit',
       iconComponent: Bank,
+      isInvalid: Boolean(errorMessage),
     },
     {
       label: paymentLabels.cash,
       value: 'cash',
       iconComponent: Money,
+      isInvalid: Boolean(errorMessage),
     },
   ]
 
   return (
-    <Controller
-      name="payment"
-      control={control}
-      render={({ field: { onChange }, formState: { errors } }) => (
-        <>
-          <RadioRoot aria-label="Payment Options" onValueChange={onChange}>
-            {options.map((option) => (
-              <RadioItem
-                key={option.value}
-                value={option.value}
-                aria-invalid={errors.payment ? 'true' : 'false'}
-              >
-                <option.iconComponent size={16} />
-                {option.label}
-              </RadioItem>
-            ))}
-          </RadioRoot>
-          {errors.payment && (
-            <ErrorMessage role="alert">{errors.payment.message}</ErrorMessage>
-          )}
-        </>
-      )}
-    />
+    <>
+      <RadioGroup options={options} onChange={onChange} />
+      {errorMessage && <ErrorMessage role="alert">{errorMessage}</ErrorMessage>}
+    </>
   )
 }

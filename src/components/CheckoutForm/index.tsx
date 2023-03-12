@@ -1,6 +1,6 @@
-import { Coffee, CurrencyDollar, MapPinLine } from 'phosphor-react'
+import { CurrencyDollar, MapPinLine } from 'phosphor-react'
 import { useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useTheme } from 'styled-components'
 import { Card } from '../Card'
 import { CardHeading } from '../Card/CardHeading'
@@ -8,16 +8,18 @@ import { DeliveryAddress } from './DeliveryAddress'
 import { OrderTotals } from './OrderTotals'
 import { PaymentOptions } from './PaymentOptions'
 import { OrderItems } from './OrderItems'
-import {
-  CheckoutFormContainer,
-  EmptyBasketNotice,
-  SubmitButton,
-} from './styles'
+import { CheckoutFormContainer, SubmitButton } from './styles'
 import { BasketContext } from '../../contexts/BasketContext'
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
+import {
+  Controller,
+  FormProvider,
+  SubmitHandler,
+  useForm,
+} from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Heading } from '../Heading'
+import { EmptyBasketMessage } from './EmptyBasketMessage'
 
 const paymentEnum = z.enum(['debit', 'credit', 'cash'], {
   required_error: 'Please select a payment method',
@@ -51,6 +53,7 @@ export function CheckoutForm() {
   const {
     handleSubmit,
     formState: { isSubmitting },
+    control,
   } = formMethods
 
   /**
@@ -73,23 +76,13 @@ export function CheckoutForm() {
 
   return (
     <>
-      {basketItems.length === 0 && (
-        <Card alignCenter>
-          <EmptyBasketNotice>
-            <Coffee size={50} />
-            <Heading variant="h4">Oops, your basket is empty!</Heading>
-            <p>
-              Please, <Link to="/">go back to the shop</Link> and select a few
-              items.
-            </p>
-          </EmptyBasketNotice>
-        </Card>
-      )}
+      {basketItems.length === 0 && <EmptyBasketMessage />}
       {basketItems.length > 0 && (
         <FormProvider {...formMethods}>
           <CheckoutFormContainer onSubmit={handleSubmit(onFormSubmit)}>
             <section>
               <Heading variant="h4">Complete your order</Heading>
+
               <Card>
                 <CardHeading
                   heading="Delivery Address"
@@ -107,7 +100,16 @@ export function CheckoutForm() {
                 >
                   <CurrencyDollar size={22} color={theme['purple-700']} />
                 </CardHeading>
-                <PaymentOptions />
+                <Controller
+                  name="payment"
+                  control={control}
+                  render={({ field: { onChange }, formState: { errors } }) => (
+                    <PaymentOptions
+                      onChange={onChange}
+                      errorMessage={errors.payment?.message}
+                    />
+                  )}
+                />
               </Card>
             </section>
 
