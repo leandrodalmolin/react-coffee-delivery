@@ -1,8 +1,8 @@
 import { ProductsListContainer } from './styles'
-import { Card } from '../../../../components/Card'
-import { productsData } from '../../../../data'
-import { Product } from './Product'
-import { Heading } from '../../../../components/Heading'
+import { Card } from '../Card'
+import { productsData } from '../../data'
+import { Product } from '../Product'
+import { Heading } from '../Heading'
 
 export function ProductsList() {
   return (

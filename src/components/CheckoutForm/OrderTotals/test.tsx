@@ -1,9 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { OrderTotals } from '.'
-import {
-  BasketContext,
-  IBasketContext,
-} from '../../../../../contexts/BasketContext'
+import { BasketContext, IBasketContext } from '../../../contexts/BasketContext'
 
 const basketContextValues = {
   items: [],

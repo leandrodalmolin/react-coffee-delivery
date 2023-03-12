@@ -1,4 +1,4 @@
-import { TagType } from '../../../../../../data'
+import { TagType } from '../../../data'
 import { TagsListContainer } from './styles'
 
 interface ITagsListProps {

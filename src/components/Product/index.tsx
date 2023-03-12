@@ -1,9 +1,9 @@
 import { TagsList } from './TagsList'
 import { PriceTag } from './PriceTag'
 import { ProductContainer } from './styles'
-import { IProduct } from '../../../../../data'
+import { IProduct } from '../../data'
 import { BasketForm } from './BasketForm'
-import { Heading } from '../../../../../components/Heading'
+import { Heading } from '../Heading'
 
 export function Product(product: IProduct) {
   const { title, description, image, tags, price } = product

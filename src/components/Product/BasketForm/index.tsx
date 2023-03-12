@@ -4,15 +4,15 @@ import { useContext } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { z, ZodSchema } from 'zod'
-import { QuantityInput } from '../../../../../../components/QuantityInput'
+import { QuantityInput } from '../../QuantityInput'
 import {
   BasketContext,
   QUANTITY_THRESHOLD_MAX,
   QUANTITY_THRESHOLD_MIN,
-} from '../../../../../../contexts/BasketContext'
-import { IProduct } from '../../../../../../data'
-import { useToast } from '../../../../../../hooks/useToast'
-import { IBasketItem } from '../../../../../../reducers/basket/reducer'
+} from '../../../contexts/BasketContext'
+import { IProduct } from '../../../data'
+import { useToast } from '../../../hooks/useToast'
+import { IBasketItem } from '../../../reducers/basket/reducer'
 import { BasketFormContainer } from './style'
 
 const basketFormSchema: ZodSchema<IBasketItem> = z.object({

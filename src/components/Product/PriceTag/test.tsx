@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { ThemeProvider } from 'styled-components'
 import { PriceTag } from '.'
-import { defaultTheme } from '../../../../../../styles/themes/default'
+import { defaultTheme } from '../../../styles/themes/default'
 
 describe('PriceTag Component', () => {
   it('renders price using the right format', () => {

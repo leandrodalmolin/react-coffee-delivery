@@ -1,11 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import { ThemeProvider } from 'styled-components'
 import { CheckoutForm } from '.'
-import {
-  BasketContext,
-  IBasketContext,
-} from '../../../../contexts/BasketContext'
-import { defaultTheme } from '../../../../styles/themes/default'
+import { BasketContext, IBasketContext } from '../../contexts/BasketContext'
+import { defaultTheme } from '../../styles/themes/default'
 
 jest.mock('react-router-dom', () => ({
   useNavigate: jest.fn(),

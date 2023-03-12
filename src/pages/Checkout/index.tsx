@@ -1,5 +1,5 @@
 import { Wrapper } from '../../components/Wrapper'
-import { CheckoutForm } from './components/CheckoutForm'
+import { CheckoutForm } from '../../components/CheckoutForm'
 
 export function Checkout() {
   return (

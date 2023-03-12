@@ -1,9 +1,6 @@
 import { useContext } from 'react'
-import {
-  BasketContext,
-  DELIVERY_COST,
-} from '../../../../../contexts/BasketContext'
-import { priceFormatter } from '../../../../../utils/formatter'
+import { BasketContext, DELIVERY_COST } from '../../../contexts/BasketContext'
+import { priceFormatter } from '../../../utils/formatter'
 import { OrderTotalsTable } from './styles'
 
 export function OrderTotals() {

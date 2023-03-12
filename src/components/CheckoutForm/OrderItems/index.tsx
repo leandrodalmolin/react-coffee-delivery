@@ -1,6 +1,6 @@
 import { Trash } from 'phosphor-react'
 import { useTheme } from 'styled-components'
-import { priceFormatter } from '../../../../../utils/formatter'
+import { priceFormatter } from '../../../utils/formatter'
 import {
   Divider,
   ItemCentralContainer,
@@ -14,10 +14,10 @@ import {
   BasketContext,
   QUANTITY_THRESHOLD_MAX,
   QUANTITY_THRESHOLD_MIN,
-} from '../../../../../contexts/BasketContext'
-import { QuantityInput } from '../../../../../components/QuantityInput'
-import { IBasketItem } from '../../../../../reducers/basket/reducer'
-import { useToast } from '../../../../../hooks/useToast'
+} from '../../../contexts/BasketContext'
+import { QuantityInput } from '../../QuantityInput'
+import { IBasketItem } from '../../../reducers/basket/reducer'
+import { useToast } from '../../../hooks/useToast'
 
 export function OrderItems() {
   const toast = useToast()

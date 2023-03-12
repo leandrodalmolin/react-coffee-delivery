@@ -5,8 +5,8 @@ import { RoundedIcon } from '../../components/RoundedIcon'
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
 import { useTheme } from 'styled-components'
 import { useLocation, Navigate } from 'react-router-dom'
-import { CheckoutFormInputs } from '../Checkout/components/CheckoutForm'
-import { paymentLabels } from '../Checkout/components/CheckoutForm/PaymentOptions'
+import { CheckoutFormInputs } from '../../components/CheckoutForm'
+import { paymentLabels } from '../../components/CheckoutForm/PaymentOptions'
 import { Wrapper } from '../../components/Wrapper'
 
 interface ISuccessPageState {

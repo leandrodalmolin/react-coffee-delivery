@@ -24,12 +24,12 @@ export default {
     './src/components/**/*.{ts,tsx}',
     './src/pages/**/*.{ts,tsx}',
     // remove below from coverage
+    '!./src/components/Hero/*.{ts,tsx}',
     '!./src/components/RoundedIcon/*.{ts,tsx}',
+    '!./src/components/ProductsList/*.{ts,tsx}',
+    '!./src/components/Product/*.{ts,tsx}',
     '!./src/pages/Checkout/*.{ts,tsx}',
     '!./src/pages/Home/*.{ts,tsx}',
-    '!./src/pages/Home/components/Hero/*.{ts,tsx}',
-    '!./src/pages/Home/components/ProductsList/*.{ts,tsx}',
-    '!./src/pages/Home/components/ProductsList/Product/*.{ts,tsx}',
   ],
 
   // The directory where Jest should output its coverage files

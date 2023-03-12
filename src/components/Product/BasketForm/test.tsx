@@ -3,11 +3,11 @@ import userEvent from '@testing-library/user-event'
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { BasketForm } from '.'
-import { RadixToastViewport } from '../../../../../../components/Toast'
-import { BasketContextProvider } from '../../../../../../contexts/BasketContext'
-import { ToastContextProvider } from '../../../../../../contexts/ToastContext'
-import { IProduct } from '../../../../../../data'
-import { defaultTheme } from '../../../../../../styles/themes/default'
+import { RadixToastViewport } from '../../Toast'
+import { BasketContextProvider } from '../../../contexts/BasketContext'
+import { ToastContextProvider } from '../../../contexts/ToastContext'
+import { IProduct } from '../../../data'
+import { defaultTheme } from '../../../styles/themes/default'
 
 const product = {
   id: 'p1',

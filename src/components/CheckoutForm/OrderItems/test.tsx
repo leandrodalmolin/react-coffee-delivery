@@ -2,12 +2,9 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { ThemeProvider } from 'styled-components'
 import { OrderItems } from '.'
-import {
-  BasketContext,
-  IBasketContext,
-} from '../../../../../contexts/BasketContext'
-import { ToastContextProvider } from '../../../../../contexts/ToastContext'
-import { defaultTheme } from '../../../../../styles/themes/default'
+import { BasketContext, IBasketContext } from '../../../contexts/BasketContext'
+import { ToastContextProvider } from '../../../contexts/ToastContext'
+import { defaultTheme } from '../../../styles/themes/default'
 
 const mockRemoveBasketItem = jest.fn()
 

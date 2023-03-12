@@ -2,8 +2,8 @@ import { Coffee, CurrencyDollar, MapPinLine } from 'phosphor-react'
 import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useTheme } from 'styled-components'
-import { Card } from '../../../../components/Card'
-import { CardHeading } from '../../../../components/Card/CardHeading'
+import { Card } from '../Card'
+import { CardHeading } from '../Card/CardHeading'
 import { DeliveryAddress } from './DeliveryAddress'
 import { OrderTotals } from './OrderTotals'
 import { PaymentOptions } from './PaymentOptions'
@@ -13,11 +13,11 @@ import {
   EmptyBasketNotice,
   SubmitButton,
 } from './styles'
-import { BasketContext } from '../../../../contexts/BasketContext'
+import { BasketContext } from '../../contexts/BasketContext'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Heading } from '../../../../components/Heading'
+import { Heading } from '../Heading'
 
 const paymentEnum = z.enum(['debit', 'credit', 'cash'], {
   required_error: 'Please select a payment method',

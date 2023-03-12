@@ -1,9 +1,9 @@
 import { HeroContainer, HeroHeading, HeroList, HeroSections } from './styles'
-import heroImage from '../../../../assets/hero-image.png'
+import heroImage from '../../assets/hero-image.png'
 import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
 import { useTheme } from 'styled-components'
-import { RoundedIcon } from '../../../../components/RoundedIcon'
-import { Wrapper } from '../../../../components/Wrapper'
+import { RoundedIcon } from '../RoundedIcon'
+import { Wrapper } from '../Wrapper'
 
 export function Hero() {
   const theme = useTheme()
