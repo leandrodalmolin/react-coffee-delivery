@@ -6,6 +6,7 @@ import {
   BasketContext,
   IBasketContext,
 } from '../../../../../contexts/BasketContext'
+import { ToastContextProvider } from '../../../../../contexts/ToastContext'
 import { defaultTheme } from '../../../../../styles/themes/default'
 
 const mockRemoveBasketItem = jest.fn()
@@ -60,5 +61,24 @@ describe('OrderItems Component', () => {
     await user.click(removeButton)
 
     expect(mockRemoveBasketItem).toHaveBeenCalled()
+  })
+
+  it('shows warning message when entered invalid quantity', async () => {
+    const user = userEvent.setup()
+
+    render(
+      <BasketContext.Provider value={basketContextValues}>
+        <ThemeProvider theme={defaultTheme}>
+          <ToastContextProvider>
+            <OrderItems />
+          </ToastContextProvider>
+        </ThemeProvider>
+      </BasketContext.Provider>,
+    )
+
+    const quantityInput = screen.getByRole('spinbutton')
+    await user.type(quantityInput, '-5')
+
+    expect(screen.getByText('Invalid Quantity')).toBeInTheDocument()
   })
 })

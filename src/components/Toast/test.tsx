@@ -46,7 +46,7 @@ describe('Toast Component', () => {
     expect(mockOpenChange).toHaveBeenCalled()
   })
 
-  it('renders action component', () => {
+  it('renders action correctly', () => {
     render(
       <ThemeProvider theme={defaultTheme}>
         <RadixToastProvider>
