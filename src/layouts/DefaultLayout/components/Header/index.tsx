@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import logo from '../../../../assets/logo.svg'
 import { Wrapper } from '../../../../components/Wrapper'
 import { BasketContext } from '../../../../contexts/BasketContext'
-import { Location } from './Location'
 import { HeaderActions, HeaderContainer } from './styles'
 
 export function Header() {
@@ -17,7 +16,10 @@ export function Header() {
           <img src={logo} alt="" />
         </Link>
         <HeaderActions>
-          <Location />
+          {/*
+            Disabled since it requires an API Key now
+            <Location />
+          */}
           <Link to="/checkout">
             <ShoppingCartSimple size={22} weight="fill" />
             {totals.itemsQuantity > 0 && <span>{totals.itemsQuantity}</span>}

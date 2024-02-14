@@ -28,7 +28,7 @@ Covered concepts:
 
 - States
 - ContextAPI
-- Geocoding
+- Geocoding (disabled since the service requires an API key now)
 - LocalStorage
 - State immutability
 - Lists and keys in ReactJS
