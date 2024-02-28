@@ -5,7 +5,7 @@ export const OrderItemsList = styled.ul`
   list-style: none;
 `
 
-export const OrderItemsItem = styled.li`
+export const OrderItemsItem = styled.div`
   display: grid;
   gap: 1.25rem;
   padding: 0.25rem;

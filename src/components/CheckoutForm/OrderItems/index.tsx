@@ -80,7 +80,7 @@ export function OrderItems() {
           const formattedTotalPrice = priceFormatter.format(totalPrice)
 
           return (
-            <div key={product.id}>
+            <li key={product.id}>
               <OrderItemsItem>
                 <ItemLeftContainer>
                   <img src={product.image} alt={product.title} />
@@ -113,7 +113,7 @@ export function OrderItems() {
                 <ItemRightContainer>{formattedTotalPrice}</ItemRightContainer>
               </OrderItemsItem>
               <Divider />
-            </div>
+            </li>
           )
         })}
       </OrderItemsList>

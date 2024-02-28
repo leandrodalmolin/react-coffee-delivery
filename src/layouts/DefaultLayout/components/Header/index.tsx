@@ -24,6 +24,7 @@ export function Header() {
           <Link to="/checkout">
             <ShoppingCartSimple size={22} weight="fill" />
             {totals.itemsQuantity > 0 && <span>{totals.itemsQuantity}</span>}
+            <span className="visually-hidden">Basket</span>
           </Link>
         </HeaderActions>
       </HeaderContainer>

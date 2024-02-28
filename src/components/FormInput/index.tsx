@@ -21,6 +21,7 @@ export function FormInput({
         {label}
       </label>
       <input
+        id={field}
         placeholder={label}
         aria-invalid={errorMessage ? 'true' : 'false'}
         {...register}
