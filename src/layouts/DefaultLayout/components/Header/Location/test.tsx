@@ -1,6 +1,11 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import { Location } from '.'
 
+// Mock env variables
+jest.mock(process.cwd() + '/src/utils/constants', () => ({
+  GEOCODE_API_KEY: 'test',
+}))
+
 // Fetch mock
 global.fetch = jest.fn()
 const mockFetch = fetch as jest.MockedFunction<typeof fetch>
@@ -57,9 +62,9 @@ describe('Location Component', () => {
         error({
           code: 1,
           message: 'Error',
-          PERMISSION_DENIED: 0,
-          POSITION_UNAVAILABLE: 0,
-          TIMEOUT: 0,
+          PERMISSION_DENIED: 1,
+          POSITION_UNAVAILABLE: 2,
+          TIMEOUT: 3,
         }),
     )
 

@@ -1,3 +1,6 @@
+import { useCallback } from 'react'
+import { GEOCODE_API_KEY, getPosition } from '../utils'
+
 type AddressType = {
   city: string
   country: string
@@ -12,39 +15,31 @@ type AddressType = {
 }
 
 export function useGeolocation() {
-  // Promisified getCurrentPosition method
-  function getPosition() {
-    // eslint-disable-next-line no-undef
-    return new Promise<GeolocationPosition>((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(
-        (position) => resolve(position),
-        (error) => reject(error),
-      )
-    })
-  }
-
   // Extract coordinates from GeolocationPosition
-  async function getCoords() {
+  const getCoords = useCallback(async () => {
     try {
       const { coords } = await getPosition()
       return coords
-    } catch (error: any) {
+    } catch (error) {
       throw new Error('Geolocation not allowed')
     }
-  }
+  }, [])
 
   // Fetch address from API based on latitude and longitude
-  async function fetchAddressFromAPI(latitude: number, longitude: number) {
-    try {
-      const response = await fetch(
-        `https://geocode.maps.co/reverse?lat=${latitude}&lon=${longitude}`,
-      )
-      const { address } = (await response.json()) as { address: AddressType }
-      return address
-    } catch (error: any) {
-      throw new Error('Could not connect to API')
-    }
-  }
+  const fetchAddressFromAPI = useCallback(
+    async (latitude: number, longitude: number) => {
+      try {
+        const response = await fetch(
+          `https://geocode.maps.co/reverse?lat=${latitude}&lon=${longitude}&api_key=${GEOCODE_API_KEY}`,
+        )
+        const { address } = (await response.json()) as { address: AddressType }
+        return address
+      } catch (error) {
+        throw new Error('Could not connect to API')
+      }
+    },
+    [],
+  )
 
   return {
     getCoords,

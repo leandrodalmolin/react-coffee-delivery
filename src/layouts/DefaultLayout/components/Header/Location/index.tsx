@@ -13,8 +13,10 @@ export function Location() {
       try {
         const { latitude, longitude } = await getCoords()
         const address = await fetchAddressFromAPI(latitude, longitude)
-        setLocation(`${address.city}, ${address.country_code.toUpperCase()}`)
-      } catch (error: any) {
+        const place = address.city || address.county
+        const countryCode = address.country_code.toUpperCase()
+        setLocation(`${place}, ${countryCode}`)
+      } catch (error) {
         setLocation('Not found')
       } finally {
         setLoading(false)

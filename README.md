@@ -19,16 +19,16 @@ Application to manage a shopping basket of a fictional coffee shop, which contai
 - Display in the Header the number of items in the basket
 - Display the total number of items in the basket multiplied by the amount
 - Give user feedback when:
-    - an item is added to the basket
-    - invalid quantity is entered in the product form
-    - limit of a single product added to the basket has been reached
-    - form is invalid
+  - an item is added to the basket
+  - invalid quantity is entered in the product form
+  - limit of a single product added to the basket has been reached
+  - form is invalid
 
 Covered concepts:
 
 - States
 - ContextAPI
-- Geocoding (disabled since the service requires an API key now)
+- Geocoding
 - LocalStorage
 - State immutability
 - Lists and keys in ReactJS
@@ -56,31 +56,37 @@ Covered concepts:
 - Styled-components
 
 ## Project setup
+
 ```
 npm install
 ```
 
 ### Start dev server
+
 ```
 npm run dev
 ```
 
 ### Build for production
+
 ```
 npm run build
 ```
 
 ### Locally preview production build
+
 ```
 npm run preview
 ```
 
 ### Lint files
+
 ```
 npm run lint
 ```
 
 ### Tests
+
 ```
 npm run test
 ```

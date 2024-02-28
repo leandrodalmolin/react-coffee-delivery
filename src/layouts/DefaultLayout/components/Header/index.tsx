@@ -5,6 +5,7 @@ import logo from '../../../../assets/logo.svg'
 import { Wrapper } from '../../../../components/Wrapper'
 import { BasketContext } from '../../../../contexts/BasketContext'
 import { HeaderActions, HeaderContainer } from './styles'
+import { Location } from './Location'
 
 export function Header() {
   const { totals } = useContext(BasketContext)
@@ -17,10 +18,7 @@ export function Header() {
           <span className="visually-hidden">Home</span>
         </Link>
         <HeaderActions>
-          {/*
-            Disabled since it requires an API Key now
-            <Location />
-          */}
+          <Location />
           <Link to="/checkout">
             <ShoppingCartSimple size={22} weight="fill" />
             {totals.itemsQuantity > 0 && <span>{totals.itemsQuantity}</span>}

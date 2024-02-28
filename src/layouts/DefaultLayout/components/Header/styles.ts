@@ -6,6 +6,7 @@ export const HeaderContainer = styled.header`
   align-items: center;
   justify-content: space-between;
   padding: 2rem 0;
+  gap: 0.75rem;
 
   @media ${breakpoint.md} {
     padding: 2.5rem 0;
@@ -16,6 +17,8 @@ export const HeaderActions = styled.div`
   gap: 0.75rem;
 
   a {
+    display: flex;
+    align-items: center;
     position: relative;
     border-radius: 6px;
     padding: 0.5rem;
