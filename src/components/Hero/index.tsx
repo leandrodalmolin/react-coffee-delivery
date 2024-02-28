@@ -15,10 +15,10 @@ export function Hero() {
           <div>
             <HeroHeading>
               <h1>Find the perfect coffee for any time of day</h1>
-              <h4>
+              <h2>
                 With Coffee Delivery you get your coffee wherever you are,
                 anytime
-              </h4>
+              </h2>
             </HeroHeading>
             <HeroList>
               <li>

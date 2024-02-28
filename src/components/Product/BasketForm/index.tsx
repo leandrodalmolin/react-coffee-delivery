@@ -136,6 +136,7 @@ export function BasketForm({ product }: IBasketFormProps) {
 
         <button type="submit">
           <ShoppingCartSimple size={22} weight="fill" />
+          <span className="visually-hidden">Add to basket</span>
         </button>
       </BasketFormContainer>
     </>

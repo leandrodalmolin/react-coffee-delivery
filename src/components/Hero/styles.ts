@@ -66,7 +66,7 @@ export const HeroHeading = styled.div`
     color: ${({ theme }) => theme['base-900']};
   }
 
-  h4 {
+  h2 {
     font-size: 1.25rem;
     font-weight: 400;
     line-height: 1.3;

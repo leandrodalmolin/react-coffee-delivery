@@ -14,6 +14,7 @@ export function Header() {
       <HeaderContainer>
         <Link to="/">
           <img src={logo} alt="" />
+          <span className="visually-hidden">Home</span>
         </Link>
         <HeaderActions>
           {/*

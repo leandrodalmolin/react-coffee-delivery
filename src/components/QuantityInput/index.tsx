@@ -31,7 +31,7 @@ export function QuantityInput({
           disabled={disableDecrementButton}
         >
           <Minus weight="bold" />
-          <span className="visually-hidden">Decrement floor</span>
+          <span className="visually-hidden">Decrement quantity</span>
         </button>
 
         <InputNumber
@@ -39,6 +39,8 @@ export function QuantityInput({
           type="number"
           value={quantity}
           onChange={onChange}
+          name="quantity"
+          aria-label="Quantity"
         />
 
         <button
@@ -48,7 +50,7 @@ export function QuantityInput({
           disabled={disableIncrementButton}
         >
           <Plus weight="bold" />
-          <span className="visually-hidden">Increment floor</span>
+          <span className="visually-hidden">Increment quantity</span>
         </button>
       </QuantityInputContainer>
     </>
